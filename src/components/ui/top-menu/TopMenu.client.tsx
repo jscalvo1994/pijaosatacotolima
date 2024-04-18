@@ -11,7 +11,7 @@ export const TopMenu = () => {
     const [showSubMenuProyectos, setShowSubMenuProyectos] = useState(false);
 
     return (
-        <><nav className="flex px-5 justify-between items-center w-full">
+        <><nav className="container mx-auto flex px-5 justify-between items-center w-full">
             <div className="px-2 mx-5">
                 <Link href="/">
                     <Image
@@ -26,7 +26,7 @@ export const TopMenu = () => {
                 <div className="flex">
                    {/*Frist Menu endend */}
                     <div onMouseEnter={() => setShowSubMenuNosotros(true)} onMouseLeave={() => setShowSubMenuNosotros(false)}>
-                        <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-2xl" href="/category/nosotros">Nosotros</Link>
+                        <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-lg" href="/category/nosotros">Nosotros</Link>
                         {showSubMenuNosotros && (
                             <div className="absolute bg-white rounded-md shadow-lg py-2 mt-2">
                                 <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nosotros/gobernadores">Gobernadores</Link>
@@ -38,7 +38,7 @@ export const TopMenu = () => {
                     </div>
                     {/*Second Menu endend */}
                     <div onMouseEnter={() => setShowSubMenuProyectos(true)} onMouseLeave={() => setShowSubMenuProyectos(false)}>
-                        <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-2xl" href="/category/nosotros">Nuestros Proyectos</Link>
+                        <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-lg" href="/category/nosotros">Nuestros Proyectos</Link>
                         {showSubMenuProyectos && (
                             <div className="absolute bg-white rounded-md shadow-lg py-2 mt-2">
                                 <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nosotros/gobernadores">Perecederos</Link>
@@ -49,11 +49,11 @@ export const TopMenu = () => {
                     </div>
                     {/*trid Menu endend */}
                     <div>
-                    <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-2xl" href="/category/nosotros">Caracterizacion</Link>
+                    <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-lg" href="/category/nosotros">Caracterizacion</Link>
                     </div>
                     {/*Four Menu endend */}
                     <div>
-                    <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-2xl" href="/category/nosotros">Contactenos</Link>
+                    <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-lg" href="/category/nosotros">Contactenos</Link>
                     </div>
                    
 
