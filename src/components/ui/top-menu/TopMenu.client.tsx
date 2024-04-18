@@ -2,6 +2,7 @@
 import { titleFonts } from "@/config/fonts"
 import { useState } from 'react';
 import { IoSearchOutline, IoCartOutline } from "react-icons/io5";
+import "./TopMenu.css"
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,9 +17,9 @@ export const TopMenu = () => {
                     <Image
                         src="/imgs/Comunidad_Pijao2.jpg"
                         alt="logo_comunidad_pijao"
-                        className="p-5 sm:p-0 transition-all"
-                        width={550}
-                        height={550} />
+                        className="p-5 sm:p-0 transition-all images-icons"
+                        width={414}
+                        height={141} />
                 </Link>
             </div>
             <div className="hidden sm:block items-center">
