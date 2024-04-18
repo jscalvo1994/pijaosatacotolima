@@ -1,9 +1,10 @@
-import { Title } from "@/components";
+import { CarrouselGeneral } from "@/components";
+import GobernadoresPage from "./category/nosotros/gobernadores/page";
 export default function Home() {
   return (
     <>
-      <h1>Esto es la pagina</h1>
-      
+      <CarrouselGeneral />
+      <GobernadoresPage />
     </>
   );
 }

@@ -8,13 +8,12 @@ import Link from "next/link";
 export const TopMenu = () => {
     const [showSubMenuNosotros, setShowSubMenuNosotros] = useState(false);
     const [showSubMenuProyectos, setShowSubMenuProyectos] = useState(false);
-
     return (
         <><nav className="flex px-5 justify-between items-center w-full">
             <div className="px-2 mx-5">
                 <Link href="/">
                     <Image
-                        src="/imgs/Comunidad_Pijao2.jpg"
+                        src="/imgs/Logos/Comunidad_Pijao2.jpg"
                         alt="logo_comunidad_pijao"
                         className="p-5 sm:p-0 transition-all"
                         width={550}
@@ -54,17 +53,8 @@ export const TopMenu = () => {
                     <div>
                     <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-2xl" href="/category/nosotros">Contactenos</Link>
                     </div>
-                   
-
-
                 </div>
             </div>
-
-
-
-
-
-
         <div className="flex items-center">
                 <Link href="/search" className="mx-2">
                     <IoSearchOutline className="w-5 h-5" />
