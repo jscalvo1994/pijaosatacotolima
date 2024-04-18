@@ -19,7 +19,9 @@ export const CarrouselGeneral = () => {
             <div className='h-2/4 flex flex-col items-center justify-center'>
                 <div className="flex justify-center items-center">
 
-                    <Image src={images[currentImageIndex]} alt="imagenes" layout="responsive" objectFit="contain" width={500} height={500} />
+                    <div className="rounded-lg overflow-hidden">
+                        <Image src={images[currentImageIndex]} alt="imagenes" layout="responsive" objectFit="contain" width={500} height={500} />
+                    </div>
 
                 </div>
                 <div className="flex mt-4">
