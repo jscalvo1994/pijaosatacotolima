@@ -26,8 +26,8 @@ export default function GobernadoresPage() {
                     <div className="w-64 h-64 relative mx-auto border-3 border-black rounded-full overflow-hidden">
                             <Image src={gobernador.imagen} alt={gobernador.nombre} layout="fill" objectFit="cover" className="rounded-full" />
                         </div>
-                        <h2 className="font-bold mt-4">{gobernador.nombre}</h2>
-                        <p>{gobernador.cargo}</p>
+                        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mt-4">{gobernador.nombre}</h2>
+                        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">{gobernador.cargo}</p>
                     </div>
                 </Link>
             </div>
