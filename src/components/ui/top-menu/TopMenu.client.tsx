@@ -39,19 +39,23 @@ export const TopMenu = () => {
                         <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-2xl" href="/category/nosotros">Nuestros Proyectos</Link>
                         {showSubMenuProyectos && (
                             <div className="absolute bg-white rounded-md shadow-lg py-2 mt-2">
-                                <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nosotros/gobernadores">Perecederos</Link>
-                                <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nosotros/misionyvision">No Perecederos</Link>
-                                <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nosotros/plandevida">Servicios</Link>
+                                <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nuestros_proyectos/predecederos">Perecederos</Link>
+                                <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nuestros_proyectos/no-predecederos">No Perecederos</Link>
+                                <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nuestros_proyectos/servicios">Servicios</Link>
                             </div>
                         )}
                     </div>
                     {/*trid Menu endend */}
                     <div>
-                    <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-2xl" href="/category/nosotros">Caracterizacion</Link>
+                    <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-2xl" href="/category/caracterizacion">Caracterizacion</Link>
                     </div>
                     {/*Four Menu endend */}
                     <div>
-                    <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-2xl" href="/category/nosotros">Contactenos</Link>
+                    <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-2xl" href="/category/contactenos">Contactenos</Link>
+                    </div>
+                         {/*Four Menu endend */}
+                         <div>
+                    <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-2xl" href="/category/chatgpt">ChatGPT</Link>
                     </div>
                 </div>
             </div>
