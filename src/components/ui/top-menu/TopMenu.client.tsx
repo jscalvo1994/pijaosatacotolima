@@ -1,14 +1,15 @@
 "use client"
 import { titleFonts } from "@/config/fonts"
 import { useState } from 'react';
-import { IoSearchOutline, IoMenuOutline, IoCloseOutline } from "react-icons/io5";
-
+import { IoChatboxEllipsesSharp, IoMenuOutline, IoCloseOutline, IoMenu } from "react-icons/io5";
+import { useUIStore } from '@/store';
 import Image from "next/image";
 import Link from "next/link";
 
 export const TopMenu = () => {
     const [showSubMenuNosotros, setShowSubMenuNosotros] = useState(false);
     const [showSubMenuProyectos, setShowSubMenuProyectos] = useState(false);
+    const openSideMenu = useUIStore(state => state.openSideMenu);
     return (
         <>
             <nav className="flex px-5 justify-between items-center w-full">
@@ -21,7 +22,7 @@ export const TopMenu = () => {
                             width={350}
                             height={350} />
                     </Link>
-                </div> 
+                </div>
                 <div className="hidden lg:block items-center">
                     <div className="flex">
                         {/*Frist Menu endend */}
@@ -37,7 +38,7 @@ export const TopMenu = () => {
                         </div>
                         {/*Second Menu endend */}
                         <div onMouseEnter={() => setShowSubMenuProyectos(true)} onMouseLeave={() => setShowSubMenuProyectos(false)}>
-                            <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-2xl" href="/category/nosotros">Proyectos</Link>
+                            <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-2xl" href="/category/nuestros_proyectos">Proyectos</Link>
                             {showSubMenuProyectos && (
                                 <div className="absolute bg-white rounded-md shadow-lg py-2 mt-2">
                                     <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nuestros_proyectos/predecederos">Perecederos</Link>
@@ -54,18 +55,23 @@ export const TopMenu = () => {
                         <div>
                             <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-2xl" href="/category/contactenos">Contactenos</Link>
                         </div>
-                        {/*Four Menu endend */}
-                        <div>
-                            <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 text-2xl" href="/category/chatgpt">ChatGPT</Link>
-                        </div>
                     </div>
                 </div>
                 <div className="flex items-center">
-                    <Link href="/search" className="mx-2">
-                        <IoSearchOutline className="w-5 h-5" />
+                    <Link href="/search" className="mx-2 flex items-center">
+                   <p 
+                   className="m-5"> 
+                   ChatIA</p> 
+                   <IoChatboxEllipsesSharp className="w-[45px] h-[45px]" />
                     </Link>
                 </div>
 
+                <button
+                    onClick={openSideMenu}
+                    title="Abrir menú lateral"
+                    className="flex lg:hidden m-2 p-2 rounded-md transition-all hover:bg-green-700 h-12 w-12">
+                    <IoMenu className="w-full h-full" />
+                </button>
             </nav>
         </>
     ) /*End return */
