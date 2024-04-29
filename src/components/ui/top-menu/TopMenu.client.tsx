@@ -24,7 +24,7 @@ export const TopMenu = () => {
                     </Link>
                 </div>
 <div className="flex-col md:flex-row items-center hidden lg:block">
-    <div className="flex flex-col sm:flex-row md:grid md:grid-cols-2 lg:grid-cols-2 md:items-center md:justify-center">
+    <div className="flex flex-col sm:flex-row md:grid md:grid-cols-2 lg:grid-cols-4 md:items-center md:justify-center">
 {/*Menu Navbar Large */}
 <div onMouseEnter={() => setShowSubMenuNosotros(true)} onMouseLeave={() => setShowSubMenuNosotros(false)}> 
     <Link className="m-5 p-2 rounded-md transition-all hover:bg-gray-400 text-[1.5rem]" href="/category/nosotros">Nosotros</Link>
@@ -48,10 +48,10 @@ export const TopMenu = () => {
     )}
 </div>
 <div>
-    <Link className="absolute m-5 p-2 rounded-md transition-all hover:bg-gray-400 text-[1.5rem]" href="/category/caracterizacion">Caracterizacion</Link>
+    <Link className=" m-5 p-2 rounded-md transition-all hover:bg-gray-400 text-[1.5rem]" href="/category/caracterizacion">Caracterizacion</Link>
 </div>
 <div>
-    <Link className="absolute m-5 p-2 rounded-md transition-all hover:bg-gray-400 text-[1.5rem]" href="/category/contactenos">Contactenos</Link>
+    <Link className=" m-5 p-2 rounded-md transition-all hover:bg-gray-400 text-[1.5rem]" href="/category/contactenos">Contactenos</Link>
 </div>
 </div>
 {/*End menu navbar */}
