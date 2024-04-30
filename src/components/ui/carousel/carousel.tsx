@@ -37,8 +37,8 @@ export const CarrouselGeneral = () => {
             </div>
 
             <div className="mt-10 p-10 text-center">
-                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-bold">Somos una comunidad indígena Pijao</h2>
-                <p className="mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl">
+                <h2 className="font-bold">Somos una comunidad indígena Pijao</h2>
+                <p className="mt-2">
                     ubicada en Ataco, Tolima, Colombia; que produce y comercializa
                     productos perecederos y de turismo ancestral.
                 </p>

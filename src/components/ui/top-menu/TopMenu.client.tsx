@@ -23,41 +23,41 @@ export const TopMenu = () => {
                             height={350} />
                     </Link>
                 </div>
-<div className="flex-col md:flex-row items-center hidden lg:block">
-    <div className="flex flex-col sm:flex-row md:grid md:grid-cols-2 lg:grid-cols-4 md:items-center md:justify-center">
-{/*Menu Navbar Large */}
-<div onMouseEnter={() => setShowSubMenuNosotros(true)} onMouseLeave={() => setShowSubMenuNosotros(false)}> 
-    <Link className="m-5 p-2 rounded-md transition-all hover:bg-gray-400 text-[1.5rem]" href="/category/nosotros">Nosotros</Link>
-    {showSubMenuNosotros && (
-        <div className="absolute bg-white rounded-md shadow-lg py-2 mt-2">
-            <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nosotros/misionyvision">Mision y Vision</Link>
-            <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nosotros/plandevida">Plan de Vida</Link>
-            <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nosotros/comunidades">Comunidades</Link>
-        </div>
-    )}
-</div>
+                <div className="flex-col md:flex-row items-center hidden lg:block">
+                    <div className="flex flex-col sm:flex-row md:grid md:grid-cols-2 lg:grid-cols-4 md:items-center md:justify-center">
+                        {/*Menu Navbar Large */}
+                        <div onMouseEnter={() => setShowSubMenuNosotros(true)} onMouseLeave={() => setShowSubMenuNosotros(false)}>
+                            <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400" href="/category/nosotros">Nosotros</Link>
+                            {showSubMenuNosotros && (
+                                <div className="absolute bg-white rounded-md shadow-lg py-2 mt-2">
+                                    <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nosotros/misionyvision">Mision y Vision</Link>
+                                    <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nosotros/plandevida">Plan de Vida</Link>
+                                    <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nosotros/comunidades">Comunidades</Link>
+                                </div>
+                            )}
+                        </div>
 
-<div onMouseEnter={() => setShowSubMenuProyectos(true)} onMouseLeave={() => setShowSubMenuProyectos(false)}>
-    <Link className="m-5 p-2 rounded-md transition-all hover:bg-gray-400 text-[1.5rem]" href="/category/nuestros_proyectos">Proyectos</Link>
-    {showSubMenuProyectos && (
-        <div className="absolute bg-white rounded-md shadow-lg py-2 mt-2">
-            <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nuestros_proyectos/predecederos">Perecederos</Link>
-            <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nuestros_proyectos/no-predecederos">No Perecederos</Link>
-            <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nuestros_proyectos/servicios">Servicios</Link>
-        </div>
-    )}
-</div>
-<div>
-    <Link className=" m-5 p-2 rounded-md transition-all hover:bg-gray-400 text-[1.5rem]" href="/category/caracterizacion">Caracterizacion</Link>
-</div>
-<div>
-    <Link className=" m-5 p-2 rounded-md transition-all hover:bg-gray-400 text-[1.5rem]" href="/category/contactenos">Contactenos</Link>
-</div>
-</div>
-{/*End menu navbar */}
-</div>
+                        <div onMouseEnter={() => setShowSubMenuProyectos(true)} onMouseLeave={() => setShowSubMenuProyectos(false)}>
+                            <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 " href="/category/nuestros_proyectos">Proyectos</Link>
+                            {showSubMenuProyectos && (
+                                <div className="absolute bg-white rounded-md shadow-lg py-2 mt-2">
+                                    <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nuestros_proyectos/predecederos">Perecederos</Link>
+                                    <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nuestros_proyectos/no-predecederos">No Perecederos</Link>
+                                    <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nuestros_proyectos/servicios">Servicios</Link>
+                                </div>
+                            )}
+                        </div>
+                        <div>
+                            <Link className=" mr-10 rounded-md transition-all hover:bg-gray-400" href="/category/caracterizacion">Caracterizacion</Link>
+                        </div>
+                        <div>
+                            <Link className=" ml-10 rounded-md transition-all hover:bg-gray-400" href="/category/contactenos">Contactenos</Link>
+                        </div>
+                    </div>
+                    {/*End menu navbar */}
+                </div>
                 <div className="flex items-center">
-                    <Link href="/search" className="mx-2 flex items-center">
+                    <Link href="/search" className="mx-6 flex items-center">
                         <p className="m-5">ChatIA</p>
                         <IoChatboxEllipsesSharp className="w-[45px] h-[45px]" />
                     </Link>
