@@ -34,7 +34,7 @@ export const Slidebar = () => {
       <nav
         className={
           clsx(
-            "fixed p-5 right-0 top-0 w-[500px] h-screen bg-white z-20 shadow-2xl transform transition-all duration-300",
+            "fixed p-5 right-0 top-0 w-50% h-screen bg-white z-20 shadow-2xl transform transition-all duration-300",
             {
               "translate-x-full": !isSideMenuOpen
             }
@@ -52,20 +52,25 @@ export const Slidebar = () => {
         <Link 
         href="/category/nosotros"
         className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+        onClick={ () => closeMenu() }
         >
-          <IoPeopleOutline size={ 30 } />
+          <IoPeopleOutline 
+            size={ 30 } 
+            />
           <span className="ml-3 text-xl">Nosotros</span>
           </Link>
           <Link 
-        href="/category/nosotros"
+        href="/category/nuestros_proyectos"
         className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+        onClick={ () => closeMenu() }
         >
           <IoPeopleOutline size={ 30 } />
           <span className="ml-3 text-xl">Proyectos</span>
           </Link>
           <Link 
-        href="/category/nosotros"
+        href="/category/caracterizacion"
         className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+        onClick={ () => closeMenu() }
         >
           <IoPeopleOutline size={ 30 } />
           <span className="ml-3 text-xl">Caracterizacion</span>
@@ -74,8 +79,9 @@ export const Slidebar = () => {
         <div className="w-full h-px bg-gray-200 my-10" />
 
         <Link 
-        href="/category/nosotros"
+        href="/category/contactenos"
         className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+        onClick={ () => closeMenu() }
         >
           <IoPeopleOutline size={ 30 } />
           <span className="ml-3 text-xl">Contactenos</span>

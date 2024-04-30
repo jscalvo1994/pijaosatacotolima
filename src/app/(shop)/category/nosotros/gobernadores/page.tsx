@@ -18,7 +18,7 @@ export default function GobernadoresPage() {
 
     return (
         <div className="flex flex-wrap justify-center p-10 mt-30">
-        <h1 className="w-full text-center mb-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-bold">Gobernadores</h1>
+        <h1 className="w-full text-center mb-6 font-bold">Gobernadores</h1>
         {gobernadores.map((gobernador, index) => (
             <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4" key={index} >
                 <Link href="/">
@@ -26,8 +26,8 @@ export default function GobernadoresPage() {
                     <div className="w-64 h-64 relative mx-auto border-3 border-black rounded-full overflow-hidden">
                             <Image src={gobernador.imagen} alt={gobernador.nombre} layout="fill" objectFit="cover" className="rounded-full" />
                         </div>
-                        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mt-4">{gobernador.nombre}</h2>
-                        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">{gobernador.cargo}</p>
+                        <h2 className="font-bold mt-4">{gobernador.nombre}</h2>
+                        <p className="">{gobernador.cargo}</p>
                     </div>
                 </Link>
             </div>
