@@ -22,7 +22,14 @@ const config: Config = {
       }
     },
   },
-  plugins: [],
+  variants: {
+    extend: {
+      borderColor: ['invalid'],
+    },
+  },
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 };
 
 export default config;

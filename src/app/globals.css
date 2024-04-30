@@ -1,7 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@layer components {
+  .form-input:invalid {
+    @apply border-black bg-red-500;
+  }
+}
 :root {
   --primary: #274494;
   --foreground-rgb: 0, 0, 0;

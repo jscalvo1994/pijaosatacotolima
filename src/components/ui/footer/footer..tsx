@@ -28,9 +28,9 @@ export const Footer = () => {
                 <div className="w-full md:w-1/3 md:order-3">
                     <h5 className="uppercase mb-2 font-bold text-2xl">Comunidad Indígena Pijao</h5>
                     <p className="text-sm"><span className="underline">Gobernador Brisas de Ata</span></p>
-                    <p className="text-sm font-bold"><AiOutlineMail size={20}  className="inline" /> Ataco – Tolima – Colombiao​​​​​</p>
-                    <p className="text-sm font-bold">Jonathan Jimenez Tovar</p>
-                    <p className="text-sm"><AiOutlinePhone  className="inline" />Telefono: 3143951569</p>
+                    <p className="text-sm font-bold"><MdLocationOn size={20}  className="inline" /> Ataco – Tolima – Colombia</p>
+                    <p className="text-sm font-bold">Contactanos a travez de</p>
+                    <p className="text-sm font-bold"><AiOutlineMail size={20} className="inline" /> johanna.trujillo@campusucc.edu.co​​​​​</p>
                 </div>
             </div>
 <div className="mt-4 border-t border-gray-400 pt-4 md:flex justify-center items-center">
