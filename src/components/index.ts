@@ -4,3 +4,4 @@ export * from './ui/title/Title';
 export * from './ui/carousel/carousel';
 export * from './ui/footer/footer.';
 export * from './ui/sidebar/Sidebar';
+export * from './ui/checklist/checklist';
