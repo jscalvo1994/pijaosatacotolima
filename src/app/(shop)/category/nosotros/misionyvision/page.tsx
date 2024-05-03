@@ -12,7 +12,7 @@ export default function Mision_VisionPage() {
                         {/* Aquí va el primer div grande */}
                         <div className="flex  items-center justify-center pb-8 ">
                             <div className="w-1/2 h-[500px] relative">
-                                <Image src="/imgs/Fotos_Perfil/perfil1.webp" alt="Descripción de la imagen" layout="fill" objectFit="cover" />
+                                <Image src="/imgs/Fotos_Perfil/perfil2-6.webp" alt="Descripción de la imagen" layout="fill" objectFit="cover" />
                             </div>
 
                         </div>
@@ -61,7 +61,7 @@ export default function Mision_VisionPage() {
                     </div>
                     <div className="w-full md:w-1/2">
                         <div className="w-1/2 h-[500px] relative">
-                            <Image src="/imgs/Fotos_Perfil/perfil1.webp" alt="Descripción de la imagen" layout="fill" objectFit="cover" />
+                            <Image src="/imgs/Fotos_Perfil/perfil2-6.webp" alt="Descripción de la imagen" layout="fill" objectFit="cover" />
                         </div>
                     </div>
                 </div>
