@@ -8,7 +8,7 @@ export default function PlanDeVidaPage() {
 
     return (
         <div className="flex flex-wrap justify-center p-10 mt-30">
-            <h1 className="w-full text-center mb-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-bold">Plan De Vida</h1>
+            <h1 className="w-full text-center mb-6 font-bold">Plan De Vida</h1>
             
             <div className="w-full flex justify-center">
                 <Link href="/path/to/pdf" className="btn">
@@ -16,7 +16,7 @@ export default function PlanDeVidaPage() {
                 </Link>
             </div>
 
-            <h2 className="w-full text-center mt-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold">Podcast</h2>
+            <h2 className="w-full text-center mt-6 l font-bold">Podcast</h2>
             <div className="flex flex-wrap justify-center">
                 {/* Reemplaza esto con tus podcasts */}
                 {Array(15).fill(null).map((_, i) => (
@@ -37,7 +37,7 @@ export default function PlanDeVidaPage() {
                 ))}
             </div>
 
-            <h2 className="w-full text-center mt-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold">Nuestros Videos</h2>
+            <h2 className="w-full text-center mt-6  font-bold">Nuestros Videos</h2>
             <div className="flex flex-wrap justify-center">
                 {/* Reemplaza esto con tus videos */}
                 {Array(15).fill(null).map((_, i) => (

@@ -10,7 +10,7 @@ export default function CaracterizacionPage() {
         <>
             <h1 className={`${titleFonts.className} my-2.5 text-center mx-auto antialiased text-4xl mb-5 font-bold}`} >Misión la Comunidad Pijao de Ataco – Tolima - Colombia:</h1>
             {/*Inicio presentacion */}
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap mt-14">
                 <div className="w-full md:w-1/2">
                     {/* Aquí va el primer div grande */}
                     <div className="flex  items-center justify-center pb-8 ">
@@ -26,7 +26,7 @@ export default function CaracterizacionPage() {
                 </div>
                 <div className="w-full md:w-1/2">
                     <div className="w-1/2 h-[500px] relative">
-                        <Image src="/imgs/Fotos_Perfil/perfil1.webp" alt="Descripción de la imagen" layout="fill" objectFit="cover" />
+                        <Image src="/imgs/Fotos_Perfil/nature1.webp" alt="Descripción de la imagen" layout="fill" objectFit="cover" className='rounded'/>
                     </div>
                 </div>
             </div>
