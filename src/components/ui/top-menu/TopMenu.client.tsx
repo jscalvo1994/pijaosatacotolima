@@ -57,7 +57,7 @@ export const TopMenu = () => {
                     {/*End menu navbar */}
                 </div>
                 <div className="flex items-center">
-                    <Link href="/search" className="mx-6 flex items-center">
+                    <Link href="https://chatbot-flow-gag29t463-juan-sebastian-calvo-galvis-projects.vercel.app/chatbot" className="mx-6 flex items-center">
                         <p className="m-5">ChatIA</p>
                         <IoChatboxEllipsesSharp className="w-[45px] h-[45px]" />
                     </Link>
