@@ -32,20 +32,14 @@ export default function CaracterizacionPage() {
             </div>
             {/*Fin presentacion */}
 
-            <div className="flex flex-col min-h-screen pt-32 sm:pt-52 items-center justify-center">
-                <div className="flex flex-col w-full sm:w-3/4 lg:w-1/2">
-                    <Demografia />
-                    
-                    <Geografia />
-              
-                    <Link href="/">
-                        <button className="btn-primary">
-                            Guardar Registro
-                        </button>
-                    </Link>            
-                </div>
 
-            </div>
+    <div className='h-720px'>
+        <iframe 
+        className='w-full h-720px'
+        src="https://lookerstudio.google.com/embed/reporting/1f3f04cd-ecff-4bd4-9c70-b23e7fc69592/page/p_m3i7xki8dd"
+        title="Caracterización de la comunidad Pijao de Ataco - Tolima - Colombia">
+        </iframe>
+    </div>
 
 
         </>

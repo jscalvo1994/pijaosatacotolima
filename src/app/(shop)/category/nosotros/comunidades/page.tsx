@@ -3,6 +3,7 @@ import { useState } from 'react';
 type ComunidadType = {
     comunidad: string;
     Titulo: string;
+    Imagen: string;
     Descripcion: string;
     Titulo1: string;
     Descripcion1: string;
@@ -15,11 +16,14 @@ type ComunidadType = {
     Titulo5: string;
     Descripcion5: string;
 };
+import Image from 'next/image';
 export default function Comunidades() {
+    const [isFullscreen, setIsFullscreen] = useState(false);
     const [selectedComunidad, setSelectedComunidad] = useState<ComunidadType | null>(null);
     const comunidades = [
         {
-            "comunidad": 'comunidad-indigena-ico-valle-de-anape',
+            "comunidad": 'comunidad-indigena indigena ico valle de anape',
+            "Imagen": "/imgs/comunidades/comunidad01.jpg",
             "Titulo": "Origenes", "Descripcion": "En 1778, Alonso Fuenmayor, guerrero italiano, fundó Ataico a orillas del Río Saldaña en territorio de Anape. El cacique Ico, líder de la tribu anaca, vigilaba el río contra avalanchas. Las aldeas, ubicadas en la mesa de los hornitos, se dedicaban a minería, agricultura, caza y pesca. Sin embargo, la llegada de conquistadores trajo consigo la obligación de trabajar y la imposición de la evangelización católica, evidenciada en el primer bautizo en la parroquia San José de Ataico.",
             "Titulo1": "Organizacion", "Descripcion1": "Organizada por una asamblea general, la comunidad tiene un cabildo de ocho integrantes y una guardia indígena con cinco miembros. Diversos comités, como el de paz, reconciliación y gobierno juvenil, fortalecen el cabildo en derechos humanos y reglamento interno. El reglamento interno propio, creado en asambleas generales, se aprobó en 2017.",
             "Titulo2": "Desafios", "Descripcion2": "A pesar de no contar con tierras tituladas, la comunidad persiste en un lote de 2 Ha llamado Unidad Agrícola Comunitaria Indígena (UACIS). Aquí, desarrollan actividades como piscicultura y cría de cerdos. La comunidad lucha por pervivir a través de su cultura ancestral Pijao, manteniendo música, danza, y gastronomía tradicional ",
@@ -29,6 +33,7 @@ export default function Comunidades() {
         },
         {
             "comunidad": 'Comunidad Indígena Kalapicá Ambulú Territorio Sagrado',
+            "Imagen": "/imgs/comunidades/comunidad02.jpg",
             "Titulo": "Origenes", "Descripcion": "La comunidad se llama Kalapicá Ambulú Territorio Sagrado, derivado de los caciques Cala y Pica. Está al sur de Ataco, limitando con diversas zonas: al oriente con Apone y Salado Negro, al occidente con Chaparral y el río Saldaña, al norte con Paipa y el sector urbano, y al sur con El Viso. El clima es cálido, con un máximo de 38°C.",
             "Titulo1": "Desafios", "Descripcion1": "El suministro de agua se realiza mediante aljibes y un acueducto en la quebrada Paipa. Sin embargo, hay deficiencias en construcción y mejoramiento de unidades sanitarias. La comunidad busca acceso a electricidad. Tambien se tiene en cuenta la Poblacion y vivienda. la comunidad tiene 324 personas, distribuidas sin tierras tituladas. Alrededor de 10 familias tienen viviendas de bahareque, algunas de material, y aproximadamente 20 carecen de vivienda propia.   ",
             "Titulo2": "Educacion", "Descripcion2": "Niños y jóvenes asisten a escuelas y colegios, pero la falta de un currículo propio y etnoeducadores afecta la preservación de enseñanzas ancestrales.. ",
@@ -38,6 +43,7 @@ export default function Comunidades() {
         },
         {
             "comunidad": 'Comunidad Indígena Mesa de Pole',
+            "Imagen": "/imgs/comunidades/comunidad03.jpg",
             "Titulo": "Viviendas y Tierras", "Descripcion": "El 60% de las familias tiene viviendas de bahareque, mientras que el 20% cuenta con casas de material. Gestionan la titulación de tierras y buscan mejorar las condiciones de vida, incluyendo acceso a agua y electricidad. En educación, algunos niños asisten a instituciones locales y otros a la Institución Educativa Técnica Martín Pomala sede Mesa de Pole.",
             "Titulo1": "Tradiciones", "Descripcion1": "Las tradiciones y costumbres de Mesa de Pole, aunque no detalladas en la búsqueda, probablemente incluyan celebraciones, rituales y prácticas que fortalecen su identidad y cohesión social, vinculadas a su rica herencia cultural.",
             "Titulo2": "Eventos y Celebraciones", "Descripcion2": "La información específica sobre eventos y celebraciones no está disponible en los resultados de búsqueda. Se recomienda contactar a fuentes locales para obtener detalles sobre las festividades y prácticas específicas de la comunidad. ",
@@ -47,6 +53,7 @@ export default function Comunidades() {
         },
         {
             "comunidad": 'Comunidad Indígena Brisas del Atá',
+            "Imagen": "/imgs/comunidades/comunidad01.jpg",
             "Titulo": "Origenes", "Descripcion": "La comunidad indígena Brisas del Atá se asienta en el territorio ancestral del cañón del Río Atá, distribuyéndose en diez veredas del corregimiento de Santiago Pérez, a unos 50 kilómetros del municipio de Ataco.",
             "Titulo1": "Origen Historico", "Descripcion1": "Denominada así por el cacique Ata que lideró el asentamiento indígena en la región, Brisas del Atá está compuesta por familias provenientes de los municipios de Natagaima, Coyaima y Ataco. El censo interno de 2019 registra 59 familias, con un total de 164 hombres y 166 mujeres.",
             "Titulo2": "Estructura", "Descripcion2": "Siguiendo la estructura común de las comunidades indígenas, Brisas del Atá cuenta con un Cabildo, Asamblea Mayor, guardias indígenas y comités. El Cabildo, conformado por ocho miembros, incluye representantes como el Gobernador(a), Gobernador suplente, alcalde(a), Comisario, Aguacil, secretario(a), Tesorero(a), y Fiscal. ",
@@ -54,10 +61,11 @@ export default function Comunidades() {
             "Titulo4": "Cultura", "Descripcion4": " Las prácticas productivas incluyen el cultivo de pancoger, cría de animales, caza, pesca y minería artesanal. A nivel cultural, destacan la orfebrería, danzas, tejido de objetos tradicionales y la fabricación de utensilios de cocina. Prácticas medicinales tradicionales, como la labor de parteras y sobanderos, también forman parte de su herencia cultural.",
             "Titulo5": "Vivienda y Educación", "Descripcion5": "La mayoría de las viviendas se construyen en bahareque, palma y palmicha. En el ámbito educativo, los niños y jóvenes se desplazan a las escuelas locales, como La Fortaleza y la I.E.T Martín Pomala.   Proyecciones:La comunidad busca fortalecer la guardia indígena, capacitar a sus miembros y actualizar el reglamento interno. Además, se enfrentan a desafíos en el acceso a la educación universitaria. "
         },
-        
+
         {
             "comunidad": 'Comunidad Indígena Ancestral Pijao Buenavista',
-            "Titulo" : "Población", "Descripcion": "La Comunidad Indígena Pijao Ancestral Buenavista, descendiente del Cacique Nátaga de Natagaima, está compuesta por 88 parciales distribuidos en 26 familias, según el auto censo del Plan de Vida. Su cabildo se sitúa en el territorio ancestral de las quebradas de Monte Frio, Miraflores, Zamundo y Choncho, albergando sitios espirituales como el Cerro Filo Cadena, Mora y el Cementerio Canchimbo.",
+            "Imagen": "/imgs/comunidades/comunidad05.jpg",
+            "Titulo": "Población", "Descripcion": "La Comunidad Indígena Pijao Ancestral Buenavista, descendiente del Cacique Nátaga de Natagaima, está compuesta por 88 parciales distribuidos en 26 familias, según el auto censo del Plan de Vida. Su cabildo se sitúa en el territorio ancestral de las quebradas de Monte Frio, Miraflores, Zamundo y Choncho, albergando sitios espirituales como el Cerro Filo Cadena, Mora y el Cementerio Canchimbo.",
             "Titulo1": "Caracterización Demográfica:", "Descripcion1": "Rango de Edad: 0-14 (31 personas), 15-18 (7 personas), 19-59 (40 personas), 60+ (10 personas) Personas con Capacidades Diversas: 2 Total de Familias: 26",
             "Titulo2": "Cultura", "Descripcion2": "Las dinámicas de vida que fortalecen la cultura ancestral Pijao incluyen danzas, música y el cultivo de semillas nativas. Las prácticas productivas se centran en el cultivo de pancoger, criadero de animales, minería artesanal y trueques entre comuneros. Prácticas culturales colectivas abarcan orfebrería, danzas, tejido de objetos tradicionales y la elaboración de bebidas tradicionales. ",
             "Titulo3": "Vivienda:", "Descripcion3": "Se reconocen prácticas medicinales como el trabajo de parteras, sobanderos y yerbateros tradicionales. Las viviendas son construidas en bahareque y palma. La comunidad reconoce la necesidad de preservar el territorio para conservar cosechas y lugares sagrados, lo cual implica potenciar los ingresos comunitarios y avanzar en la producción agrícola",
@@ -66,6 +74,7 @@ export default function Comunidades() {
         },
         {
             "comunidad": 'Resguardo Indígena Pueblo Viejo Santa Rita La Mina',
+            "Imagen": "/imgs/comunidades/comunidad06.jpg",
             "Titulo": "Origenes", "Descripcion": "El resguardo toma su nombre del asentamiento ancestral del Pueblo Pijao en el cerro de Santa Rita y su conexión con la extracción de Baritina en el territorio. Cultura: La comunidad se destaca en danzas, música y representación cultural, buscando proyección a niveles más amplios. Además, cuentan con fuentes hídricas y lugares sagrados que desean recuperar mediante mingas de intercambio para fortalecer la identidad indígena",
             "Titulo1": "Ubicación", "Descripcion1": "Situado al oriente del municipio de Ataco en un área montañosa, la población mayoritaria reside en Santa Rita La Mina, mientras que algunas familias están en La Vaga y el casco urbano. La comunidad cuenta con 122 hombres, 112 mujeres y 51 familias.",
             "Titulo2": "Recursos", "Descripcion2": "El resguardo posee 90 hectáreas gestionadas colectivamente para el cuidado del ganado, lagos con 4,000 alevinos y gallinas ponedoras. Se busca ampliar el resguardo para asegurar la soberanía alimentaria y preservar el territorio ancestral. ",
@@ -75,6 +84,7 @@ export default function Comunidades() {
         },
         {
             "comunidad": 'Comunidad Indígena Casa de Zinc',
+            "Imagen": "/imgs/comunidades/comunidad07.jpg",
             "Titulo": "Orígenes", "Descripcion": "La comunidad Casa de Zinc se considera descendiente de los caciques Atá e Ico del Tolima grande, así como de los Natagaima y Coyaimas. Sus usos y costumbres han sido transmitidos a través de generaciones siguiendo la ley de origen del Pueblo Pijao.",
             "Titulo1": "Ubicación y Costumbres", "Descripcion1": "Situada en el sureste de Ataco, Tolima, y limítrofe con Aipe, Huila, y Gaitania en Planadas, Tolima. Se puede llegar por vía carreteable y caminos de herradura, aproximadamente a 144 km de Ibagué. La comunidad se ha reconocido con autonomía propia, defendiendo sus territorios, ritos y ceremonias en sitios sagrados. Tienen autonomía para fortalecer la producción de semillas orgánicas, medicina propia, usos y costumbres, y la recuperación de la lengua Pijao. ",
             "Titulo2": "Crecimiento", "Descripcion2": "Tras desplazamientos forzados por el conflicto armado, varias familias han retornado al territorio desde 2010. Actualmente, cuentan con 50 familias y 134 personas, buscando el restablecimiento cultural, organizativo y ancestral. ",
@@ -84,6 +94,7 @@ export default function Comunidades() {
         },
         {
             "comunidad": 'Resguardo Pijao de Beltrán',
+            "Imagen": "/imgs/comunidades/comunidad08.jpg",
             "Titulo": " Ubicación ", "Descripcion": "El Resguardo Pijao de Beltrán se encuentra en el nororiente del municipio de Ataco, limitando con Natacoi Pijao al oriente, Balsillas al occidente, Guadualito al norte y Pueblo Viejo Santa Rita La Mina al sur.",
             "Titulo1": "Población", "Descripcion1": "Tierra Titulada: 200 Há (Finca San Antonio) Uso de la Tierra: Ganadería y cultivos de pan coger (plátano, yuca, cacao, entre otros) Población Actual: 303 personas en 37 familias",
             "Titulo2": "Organización", "Descripcion2": "Estructura Organizativa: Asamblea general y Cabildo (8 miembros) Guardia Indígena: Compuesta por mayores, requiere fortalecimiento y dotación Comités Activos: Paz y reconciliación, justicia para el buen vivir de las familias",
@@ -93,6 +104,7 @@ export default function Comunidades() {
         },
         {
             "comunidad": 'Comunidad Indígena Cacique de Agua Dulce',
+            "Imagen": "/imgs/comunidades/comunidad09.jpg",
             "Titulo": "Origenes", "Descripcion": "Los ancestros indígenas Pijaos, asentados cerca del río Atá desde el año 400, dieron origen a la comunidad Cacique de Agua Dulce. La denominación proviene de un yacimiento de agua agridulce descubierto durante sus movilizaciones milenarias para trueques con los indígenas Nasa.",
             "Titulo1": "Tradiciones Ancestrale", "Descripcion1": "La comunidad preserva tradiciones culturales y ancestrales Pijaos, destacándose en el cultivo del maíz para procesar la chicha, bebida ancestral protagonista de mingas e intercambios de saberes. Aunque no tienen tierras tituladas, luchan por sostener sus prácticas.",
             "Titulo2": "Organización y Gobierno", "Descripcion2": "El gobierno está a cargo del cabildo, elegido por la asamblea general, con respaldo de comités y un reglamento interno. A nivel nacional, cuentan con el respaldo de Autoridades Tradicionales Gobierno Mayor y regionalmente de la Asociación de Resguardos Indígenas del Tolima (ARIT)",
@@ -108,45 +120,64 @@ export default function Comunidades() {
                 comunidades.map((comunidad, index) => (
                     <div key={index} className="w-full sm:w-1/3 m-1 text-center">
                         <h2 onClick={() => setSelectedComunidad(comunidad)}>{comunidad.comunidad}</h2>
+                        <div className="flex items-center justify-center pb-8">
+                        
+                        <Image onClick={() => setSelectedComunidad(comunidad)} src={`${comunidad.Imagen}`} alt="Descripción de la imagen" objectFit="cover" className='rounded' height={200} width={200}/>
+                        </div>
                     </div>
                 ))
-            ) : (
-<div className="flex-1 w-1/4 m-1 p-5 text-center border-2 border-black">
-    <h2 className="font-bold">{selectedComunidad.comunidad}</h2>
-    <div>
-    <h3 className="font-bold">{selectedComunidad.Titulo}:</h3>
-    <p className="my-1">{selectedComunidad.Descripcion}</p>
-    </div>
+            ) :
+                (
+
+                    <>
+
+                        <div>
+                            <h1 className='my-2.5 text-center mx-auto antialiased font-bold text-xl'>{selectedComunidad.comunidad}</h1>
+                            <h2 className="font-bold"></h2>
+                            <div className="flex flex-wrap">
+                                <div className="w-full md:w-1/2">
+                                    <div className="flex items-center justify-center pb-8">
+                                        <div className="w-1/2 h-[500px] relative" onClick={() => setIsFullscreen(true)}>
+                                            <Image src={`${selectedComunidad.Imagen}`} alt="Descripción de la imagen" layout="fill" objectFit="cover" className='rounded' />
+                                        </div>
+                                    </div>
+
+                                    {isFullscreen && (
+                                     <div className="fixed top-0 left-0 w-screen h-screen z-50 flex items-center justify-center" onClick={() => setIsFullscreen(false)}>
+                                     <Image src={`${selectedComunidad.Imagen}`} alt="Descripción de la imagen" layout="fill" objectFit="contain" className='rounded' />
+                                   </div>
+                                    )}
+                                </div>
+                                <div className="w-full md:w-1/2">
+
+                                    <div className="w-1/2 p-4">
+
+                                        <div>
+                                            <h3 className="font-bold">{selectedComunidad.Titulo}:</h3>
+                                            <p className="my-1">{selectedComunidad.Descripcion}</p>
+
+                                            <h3 className="font-bold">{selectedComunidad.Titulo2}:</h3>
+                                            <p className="my-1">{selectedComunidad.Descripcion2}</p>
+
+                                            <h3 className="font-bold">{selectedComunidad.Titulo3}:</h3>
+                                            <p className="my-1">{selectedComunidad.Descripcion3}</p>
+
+                                            <h3 className="font-bold">{selectedComunidad.Titulo4}:</h3>
+                                            <p className="my-1">{selectedComunidad.Descripcion4}</p>
+
+                                            <h3 className="font-bold">{selectedComunidad.Titulo5}:</h3>
+                                            <p className="my-1">{selectedComunidad.Descripcion5}</p>
+                                        </div>
+                                        <button onClick={() => setSelectedComunidad(null)} className="bg-blue-500 rounded-full px-4 py-2 text-white">Volver</button>
+                                    </div>
+                                </div>
+                            </div>
 
 
-    <div>
-    <h3 className="font-bold">{selectedComunidad.Titulo1}:</h3>
-    <p className="my-1">{selectedComunidad.Descripcion1}</p>
-    </div>
-    
+                        </div>
 
-    <div>
-    <h3 className="font-bold">{selectedComunidad.Titulo2}:</h3>
-    <p className="my-1">{selectedComunidad.Descripcion2}</p>
-    </div>
-
-    <div>
-    <h3 className="font-bold">{selectedComunidad.Titulo3}:</h3>
-    <p className="my-1">{selectedComunidad.Descripcion3}</p>
-    </div>
-
-    <div>
-    <h3 className="font-bold">{selectedComunidad.Titulo4}:</h3>
-    <p className="my-1">{selectedComunidad.Descripcion4}</p>
-    </div>
-
-    <div>
-    <h3 className="font-bold">{selectedComunidad.Titulo5}:</h3>
-    <p className="my-1">{selectedComunidad.Descripcion5}</p>
-    </div>
-    <button onClick={() => setSelectedComunidad(null)} className="bg-blue-500 rounded-full px-4 py-2 text-white">Volver</button>
-</div>
-            )}
+                    </>
+                )}
         </div>
     );
 }

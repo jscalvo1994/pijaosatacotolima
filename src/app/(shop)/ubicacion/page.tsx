@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 export default function UbicacionPage() {
     return (
-<div className="flex flex-col items-center justify-center min-h-screen py-2">
+<div className="container mx-auto md:flex flex flex-col items-center justify-center min-h-screen py-2">
   <h1 className="text-6xl font-bold mb-5">Ubicacion</h1>
   <div className="flex justify-center items-center w-full h-full, sm:w-full h-full, md:w-full h-full, lg:w-full h-full, xl:w-full h-full, 2xl:w-full h-full ">
     <iframe 

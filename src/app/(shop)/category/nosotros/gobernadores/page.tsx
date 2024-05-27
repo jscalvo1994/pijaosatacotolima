@@ -17,7 +17,7 @@ export default function GobernadoresPage() {
     ]
 
     return (
-        <div className="flex flex-wrap justify-center p-10 mt-30">
+        <div className="container mx-auto md:flex items-center, flex flex-wrap justify-center p-10 mt-30">
         <h1 className="w-full text-center mb-6 font-bold">Gobernadores</h1>
         {gobernadores.map((gobernador, index) => (
             <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4" key={index} >
