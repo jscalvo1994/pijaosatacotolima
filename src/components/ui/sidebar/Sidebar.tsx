@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { useUIStore } from '@/store';
 import clsx from 'clsx';
-import { IoCloseOutline, IoSearchOutline,IoPeopleOutline } from 'react-icons/io5'
+import { IoCloseOutline,IoPeopleOutline } from 'react-icons/io5'
 export const Slidebar = () => {
   const isSideMenuOpen = useUIStore( state => state.isSideMenuOpen );
   const closeMenu = useUIStore( state => state.closeSideMenu );

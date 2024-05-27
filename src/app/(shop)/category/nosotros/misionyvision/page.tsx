@@ -5,7 +5,7 @@ export default function Mision_VisionPage() {
 
         <>
             <div>
-            <h1 className={`${titleFonts.className} my-2.5 text-center mx-auto antialiased font-bold}`} >Misión la Comunidad Pijao de Ataco – Tolima - Colombia:</h1>
+            <h1 className='my-2.5 text-center mx-auto antialiased font-bold text-xl'>Misión la Comunidad Pijao de Ataco – Tolima - Colombia:</h1>
 
                 <div className="flex flex-wrap">
                     <div className="w-full md:w-1/2">
@@ -67,10 +67,11 @@ export default function Mision_VisionPage() {
                 </div>
             </div>
 
+            <div className=''>
             {/*Segunda seccion responsive */}
-            <div className="font-sans min-h-screen mt-1 p-0">
-                <div className="max-w-2xl mx-auto p-5 rounded-xl shadow-md">
-                    <h1 className="text-xl mb-5 text-black-700 text-center p-2 rounded">Nuestros Principios Fundamentales</h1>
+            <div className="container mx-auto md:flex, font-sans min-h-screen p-0">
+                <div className="max-w-2xl mx-auto p-5 rounded-xl">
+                    <h1 className="text-xl mb-5 text-black-700 text-center p-2">Nuestros Principios Fundamentales</h1>
                 </div>
                 <div className="flex flex-wrap justify-between">
                     <div className="mb-5 p-5 bg-gray-100 rounded shadow-sm md:w-1/5">
@@ -124,7 +125,7 @@ export default function Mision_VisionPage() {
                     <div className="mb-5 p-5 bg-gray-100 rounded shadow-sm md:w-1/5">
                         <h2 className="text-lg mb-5 text-white bg-autonomia p-2 rounded">5. Autonomía y Autodeterminación</h2>
                         <div className="p-2 mb-5 bg-gray-200 rounded">
-                            <p className="text-sm leading-relaxed text-black-500">MBuscar la autonomía y autodeterminación del pueblo </p>
+                            <p className="text-sm leading-relaxed text-black-500">Buscar la autonomía y autodeterminación del pueblo </p>
                         </div>
                         <div className="p-2 mb-5 bg-gray-200 rounded">
                             <p className="text-sm leading-relaxed text-black-500">Tomar decisiones que beneficien a la comunidad según tradiciones y valores propios</p>
@@ -134,14 +135,90 @@ export default function Mision_VisionPage() {
                 </div>
             </div>
             {/*tercera division responsive  */}
+            <div className="container mx-auto md:flex, font-sans min-h-screen mt-1 p-0">
+                <div className="max-w-2xl mx-auto p-5 rounded-xl">
+                    <h1 className="text-xl mb-5 text-black-700 text-center p-2">Nuestros Valores Fundamentales</h1>
+                </div>
+                <div className="flex flex-wrap justify-between">
+                    <div className="mb-5 p-5 bg-gray-100 rounded shadow-sm md:w-1/5">
 
+                        <h2 className="text-lg mb-5 text-white bg-naturaleza p-2 rounded">1. Respeto y solidaridad</h2>
+                        <div className="p-2 mb-5 bg-gray-200 rounded">
+                            <p className="text-sm leading-relaxed text-black-500">Cultivar un ambiente de respeto mutuo.</p>
+                        </div>
+                        <div className="p-2 mb-5 bg-gray-200 rounded">
+                            <p className="text-sm leading-relaxed text-black-500">Reconocer la diversidad de opiniones y experiencias dentro de la comunidad.</p>
+                        </div>
+              
+                    </div>
+                    <div className="mb-5 p-5 bg-gray-100 rounded shadow-sm md:w-1/5">
+                        <h2 className="text-lg mb-5 text-white bg-cultural p-2 rounded">2. Integridad</h2>
+                        <div className="p-2 mb-5 bg-gray-200 rounded">
+                            <p className="text-sm leading-relaxed text-black-500">Actuar con Honestidad y Coherencia</p>
+                        </div>
+                        <div className="p-2 mb-5 bg-gray-200 rounded">
+                            <p className="text-sm leading-relaxed text-black-500">Ser responsable de acciones y comprometidos con la verdad y la transparencia</p>
+                        </div>
+                    </div>
+                    <div className="mb-5 p-5 bg-gray-100 rounded shadow-sm md:w-1/5">
+                        <h2 className="text-lg mb-5 text-white bg-social p-2 rounded">3. Reciprocidad</h2>
+                        <div className="p-2 mb-5 bg-gray-200 rounded">
+                            <p className="text-sm leading-relaxed text-black-500">Practicar la reciprocidad como valor Escencial</p>
+
+                        </div>
+                        <div className="p-2 mb-5 bg-gray-200 rounded">
+                            <p className="text-sm leading-relaxed text-black-500">Fomentar el intercambio y la colaboracion en la comunidad para fortalecer lazos</p>
+                        </div>
+                    </div>
+                    <div className="mb-5 p-5 bg-gray-100 rounded shadow-sm md:w-1/5">
+
+                        <h2 className="text-lg mb-5 text-white bg-comunitaria p-2 rounded">4. Aprendizaje Continuo</h2>
+                        <div className="p-2 mb-5 bg-gray-200 rounded">
+                            <p className="text-sm leading-relaxed text-black-500">Valorar el Aprendizaje Continuo</p>
+                        </div>
+                        <div className="p-2 mb-5 bg-gray-300 rounded">
+                            <p className="text-sm leading-relaxed text-black-500">Buscar el desarrollo Personal y colectivo</p>
+                        </div>
+                    </div>
+                    <div className="mb-5 p-5 bg-gray-100 rounded shadow-sm md:w-1/5">
+                        <h2 className="text-lg mb-5 text-white bg-autonomia p-2 rounded">5. Espiritualidad</h2>
+                        <div className="p-2 mb-5 bg-gray-200 rounded">
+                            <p className="text-sm leading-relaxed text-black-500">Buscar la autonomía y autodeterminación del pueblo </p>
+                        </div>
+                        <div className="p-2 mb-5 bg-gray-200 rounded">
+                            <p className="text-sm leading-relaxed text-black-500">Tomar decisiones que beneficien a la comunidad según tradiciones y valores propios</p>
+                        </div>
+                    </div>
+                    <div className="mb-5 p-5 bg-gray-100 rounded shadow-sm md:w-1/5">
+                        <h2 className="text-lg mb-5 text-white p-2 rounded bg-amber-400">6. Resiliencia</h2>
+                        <div className="p-2 mb-5 bg-gray-200 rounded">
+                            <p className="text-sm leading-relaxed text-black-500">Desarrollar la Resiliencia como comunidad</p>
+                        </div>
+                        <div className="p-2 mb-5 bg-gray-200 rounded">
+                            <p className="text-sm leading-relaxed text-black-500">Afrontar desafios con fortaleza y adaptabilidad</p>
+                        </div>
+                        <div className="p-2 mb-5 bg-gray-200 rounded">
+                            <p className="text-sm leading-relaxed text-black-500">Aprender de adversidades para construir un futuro mas fuerte</p>
+                        </div>
+                    </div>
+                    <div className="mb-5 p-5 bg-gray-100 rounded shadow-sm md:w-1/5">
+                        <h2 className="text-lg mb-5 text-white p-2 rounded bg-cyan-500">7. Amor y Cuidado</h2>
+                        <div className="p-2 mb-5 bg-gray-200 rounded">
+                            <p className="text-sm leading-relaxed text-black-500">Promover el amor y el cuidado hacia la comunidad y entorno </p>
+                        </div>
+                        <div className="p-2 mb-5 bg-gray-200 rounded">
+                            <p className="text-sm leading-relaxed text-black-500">Reconocer la importancia de estos valores para construitr relaciones saludables y sostenibles</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className="flex  items-center justify-center p-0">
                 <div className="w-[1980px] h-[1162px] relative">
                     <Image src="/imgs/Logos/graficoredportatil.png" alt="Descripción de la imagen" layout="fill" objectFit="cover" />
                 </div>
 
             </div>
-
+            </div>
 
         </>
 

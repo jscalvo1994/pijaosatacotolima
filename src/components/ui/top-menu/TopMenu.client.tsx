@@ -12,7 +12,7 @@ export const TopMenu = () => {
     const openSideMenu = useUIStore(state => state.openSideMenu);
     return (
         <>
-            <nav className="flex flex-col sm:flex-row px-5 justify-between items-center w-full">
+            <nav className="container mx-auto flex flex-col sm:flex-row md:flex px-5 justify-between items-center w-full border-9 border-red-950">
                 <div className="left-0 top-0 px-2 mx-5 flex-shrink-0">
                     <Link href="/">
                         <Image

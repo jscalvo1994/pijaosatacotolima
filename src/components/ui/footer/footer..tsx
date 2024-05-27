@@ -4,7 +4,7 @@ import { MdLocationOn } from 'react-icons/md'
 import { FaFlag } from 'react-icons/fa'
 export const Footer = () => {
     return (
-        <footer className=" bg-gray-500 text-white px-6 py-4">
+        <footer className="text-black px-6 py-4">
             <div className="container mx-auto md:flex justify-between items-center">
                 <div className="w-full md:w-1/3 mb-4 md:mb-0 md:order-1">
 
@@ -33,7 +33,7 @@ export const Footer = () => {
                     <p className="text-sm font-bold"><AiOutlineMail size={20} className="inline" /> johanna.trujillo@campusucc.edu.co​​​​​</p>
                 </div>
             </div>
-<div className="mt-4 border-t border-gray-400 pt-4 md:flex justify-center items-center">
+<div className="mt-4 border-t pt-4 md:flex justify-center items-center">
     <div className="w-full md:w-1/2 lg:w-1/3 h-[500px] md:h-[250px] lg:h-[150px] relative flex justify-center items-center">
         <Image src="/imgs/Logos/footer.png" alt="Descripción de la imagen" layout="fill" objectFit="contain" />
     </div>
