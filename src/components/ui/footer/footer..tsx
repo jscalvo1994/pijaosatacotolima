@@ -5,7 +5,7 @@ import { FaFlag } from 'react-icons/fa'
 export const Footer = () => {
     return (
         <footer className="text-black px-6 py-4">
-            <div className="container mx-auto md:flex justify-between items-center">
+            <div className="container mx-auto md:flex justify-between">
                 <div className="w-full md:w-1/3 mb-4 md:mb-0 md:order-1">
 
                     <h5 className="uppercase mb-2 font-bold text-2xl">Universidad Cooperativa de Colombia</h5>
