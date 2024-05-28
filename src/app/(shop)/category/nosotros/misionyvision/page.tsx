@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { titleFonts } from '@/config/fonts'
 export default function Mision_VisionPage() {
     return (
 

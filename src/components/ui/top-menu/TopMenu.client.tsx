@@ -1,7 +1,6 @@
 "use client"
-import { titleFonts } from "@/config/fonts"
 import { useState } from 'react';
-import { IoChatboxEllipsesSharp, IoMenuOutline, IoCloseOutline, IoMenu } from "react-icons/io5";
+import { IoChatboxEllipsesSharp, IoMenu } from "react-icons/io5";
 import { useUIStore } from '@/store';
 import Image from "next/image";
 import Link from "next/link";
@@ -30,7 +29,7 @@ export const TopMenu = () => {
                             <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400" href="/category/nosotros">Nosotros</Link>
                             {showSubMenuNosotros && (
                                 <div className="absolute bg-white rounded-md shadow-lg py-2 mt-2">
-                                    <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nosotros/misionyvision">Mision y Vision</Link>
+                                   {/*<Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nosotros/misionyvision">Mision y Vision</> */}
                                     <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nosotros/plandevida">Plan de Vida</Link>
                                     <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nosotros/comunidades">Comunidades</Link>
                                 </div>
