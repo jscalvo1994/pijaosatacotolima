@@ -4,17 +4,17 @@ import Image from 'next/image'
 export default function GobernadoresPage() {
     // Aquí puedes poner tus datos
     const gobernadores = [
-        { nombre: 'Inelda Bustos Acosta ', cargo:' Gobernadora comunidad resguardo indígena Santarita la Mina', imagen: '/imgs/Fotos_Perfil/IneldaBustosAcosta.PNG' },
-        { nombre: 'Diana Maritza Figueroa Ortiz', cargo:' Gobernadora comunidad indígena Kalapica Ambulu Territorio Sagrado ', imagen: '/imgs/Fotos_Perfil/DianaMaritzaFigueroa.PNG' },
-        { nombre: 'Rosmira Luna Castañeda', cargo:'Gobernadora Indigena Mesa de Pole', imagen: '/imgs/Fotos_Perfil/RosmiraLunaCastañeda.PNG' },
+        { nombre: 'Inelda Bustos Acosta ', cargo:' Gobernadora comunidad resguardo indígena Santarita la Mina', imagen: '/imgs/Fotos_Perfil/IneldaBustosAcosta.png' },
+        { nombre: 'Diana Maritza Figueroa Ortiz', cargo:' Gobernadora comunidad indígena Kalapica Ambulu Territorio Sagrado ', imagen: '/imgs/Fotos_Perfil/DianaMaritzaFigueroa.png' },
+        { nombre: 'Rosmira Luna Castañeda', cargo:'Gobernadora Indigena Mesa de Pole', imagen: '/imgs/Fotos_Perfil/RosmiraLunaCastañeda.png' },
        
         
-        { nombre: ' Guillermo Martínez', cargo:'Gobernador comunidad indígena cacique Agua Dulce ', imagen: '/imgs/Fotos_Perfil/GuillermoMartinez.PNG' },
+        { nombre: ' Guillermo Martínez', cargo:'Gobernador comunidad indígena cacique Agua Dulce ', imagen: '/imgs/Fotos_Perfil/GuillermoMartinez.png' },
         { nombre: 'Fernando Capera Aroca', cargo:' Gobernador comunidad indígena Ico Valle de ANAPE', imagen: '/imgs/Fotos_Perfil/perfil2-6.webp' },
         { nombre: ' Jonatan Jiménez Tovar', cargo:'Gobernador comunidad indígena Brisas de Ata ', imagen: '/imgs/Fotos_Perfil/perfil7.webp' },
        
-        { nombre: ' Efren Zambrano Jimenez', cargo:'Gobernador comunidad indígena Casa de Zinc ', imagen: '/imgs/Fotos_Perfil/EfrenZambranoJimenez.PNG' },
-        { nombre: 'Jair González Muñoz ', cargo:'Gobernador comunidad indígena Ancestral Pijao Buenavista', imagen: '/imgs/Fotos_Perfil/JairGonzálezMuñoz.PNG' },
+        { nombre: ' Efren Zambrano Jimenez', cargo:'Gobernador comunidad indígena Casa de Zinc ', imagen: '/imgs/Fotos_Perfil/EfrenZambranoJimenez.png' },
+        { nombre: 'Jair González Muñoz ', cargo:'Gobernador comunidad indígena Ancestral Pijao Buenavista', imagen: '/imgs/Fotos_Perfil/JairGonzálezMuñoz.png' },
         { nombre: 'Alexis Useche Quesada', cargo:'Gobernador comunidad resguardo indígena Beltrán ', imagen: '/imgs/Fotos_Perfil/perfil2-6.webp' },
         // Agrega más gobernadores según sea necesario
     ]
