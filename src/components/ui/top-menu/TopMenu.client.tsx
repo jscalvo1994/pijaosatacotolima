@@ -37,7 +37,7 @@ export const TopMenu = () => {
                         </div>
 
                         <div onMouseEnter={() => setShowSubMenuProyectos(true)} onMouseLeave={() => setShowSubMenuProyectos(false)}>
-                            <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 " href="/category/nuestros_proyectos">Proyectos</Link>
+                            <Link className="m-2 p-2 rounded-md transition-all hover:bg-gray-400 " href="/category/nuestros_proyectos">Lineas Productivas</Link>
                             {showSubMenuProyectos && (
                                 <div className="absolute bg-white rounded-md shadow-lg py-2 mt-2">
                                     <Link className="block px-4 py-2 hover:bg-gray-200" href="/category/nuestros_proyectos/predecederos">Perecederos</Link>
@@ -47,7 +47,7 @@ export const TopMenu = () => {
                             )}
                         </div>
                         <div>
-                            <Link className=" mr-10 rounded-md transition-all hover:bg-gray-400" href="/category/caracterizacion">Caracterizacion</Link>
+                            <Link className=" mr-10 rounded-md transition-all hover:bg-gray-400" href="/category/caracterizacion">npm run de </Link>
                         </div>
                         <div>
                             <Link className=" ml-10 rounded-md transition-all hover:bg-gray-400" href="/category/contactenos">Contactenos</Link>

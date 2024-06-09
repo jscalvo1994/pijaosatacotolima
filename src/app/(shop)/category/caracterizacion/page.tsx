@@ -8,7 +8,7 @@ import Link from 'next/link';
 export default function CaracterizacionPage() {
     return (
         <>
-            <h1 className={`${titleFonts.className} my-2.5 text-center mx-auto antialiased text-4xl mb-5 font-bold}`} >Misión la Comunidad Pijao de Ataco – Tolima - Colombia:</h1>
+            <h1 className= "my-2.5 text-center mx-auto antialiased text-4xl mb-5 font-bold">Misión la Comunidad Pijao de Ataco – Tolima - Colombia:</h1>
             {/*Inicio presentacion */}
             <div className="flex flex-wrap mt-14">
                 <div className="w-full md:w-1/2">
@@ -33,9 +33,9 @@ export default function CaracterizacionPage() {
             {/*Fin presentacion */}
 
 
-    <div className='h-720px'>
+    <div className='h-full'>
         <iframe 
-        className='w-full h-720px'
+        className='w-full h-'
         src="https://lookerstudio.google.com/embed/reporting/1f3f04cd-ecff-4bd4-9c70-b23e7fc69592/page/p_m3i7xki8dd"
         title="Caracterización de la comunidad Pijao de Ataco - Tolima - Colombia">
         </iframe>
