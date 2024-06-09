@@ -24,7 +24,7 @@ export default function GobernadoresPage() {
         <h1 className="w-full text-center mb-6 font-bold">Gobernadores</h1>
         {gobernadores.map((gobernador, index) => (
             <div className="sm:w-1/3 w-1/3 p-4" key={index} >
-                <Link href="/">
+                <Link href="../comunidades/page.tsx">
                     <div className="text-center">
                     <div className="w-64 h-64 relative mx-auto border-3 border-black rounded-full overflow-hidden">
                             <Image src={gobernador.imagen} alt={gobernador.nombre} layout="fill" objectFit="cover" className="rounded-full" />

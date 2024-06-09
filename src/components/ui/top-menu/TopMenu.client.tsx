@@ -47,9 +47,6 @@ export const TopMenu = () => {
                             )}
                         </div>
                         <div>
-                            <Link className=" mr-10 rounded-md transition-all hover:bg-gray-400" href="/category/caracterizacion">npm run de </Link>
-                        </div>
-                        <div>
                             <Link className=" ml-10 rounded-md transition-all hover:bg-gray-400" href="/category/contactenos">Contactenos</Link>
                         </div>
                     </div>
