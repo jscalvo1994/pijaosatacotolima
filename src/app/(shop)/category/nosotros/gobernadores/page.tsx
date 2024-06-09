@@ -4,9 +4,9 @@ import Image from 'next/image'
 export default function GobernadoresPage() {
     // Aquí puedes poner tus datos
     const gobernadores = [
-        { nombre: 'Inelda Bustos Acosta ', cargo:' Gobernadora comunidad resguardo indígena Santarita la Mina', imagen: '/imgs/Fotos_Perfil/IneldaBustosAcosta.PNG' },
-        { nombre: 'Diana Maritza Figueroa Ortiz', cargo:' Gobernadora comunidad indígena Kalapica Ambulu Territorio Sagrado ', imagen: '/imgs/Fotos_Perfil/DianaMaritzaFigueroa.PNG' },
-        { nombre: 'Rosmira Luna Castañeda', cargo:'Gobernadora Indigena Mesa de Pole', imagen: '/imgs/Fotos_Perfil/RosmiraLunaCastañeda.PNG' },
+        { nombre: 'Inelda Bustos Acosta ', cargo:' Gobernadora comunidad resguardo indígena Santarita la Mina', imagen: '/imgs/Fotos_Perfil/IneldaBustosAcosta.png' },
+        { nombre: 'Diana Maritza Figueroa Ortiz', cargo:' Gobernadora comunidad indígena Kalapica Ambulu Territorio Sagrado ', imagen: '/imgs/Fotos_Perfil/DianaMaritzaFigueroa.png' },
+        { nombre: 'Rosmira Luna Castañeda', cargo:'Gobernadora Indigena Mesa de Pole', imagen: '/imgs/Fotos_Perfil/RosmiraLunaCastañeda.png' },
        
         
         { nombre: ' Guillermo Martínez', cargo:'Gobernador comunidad indígena cacique Agua Dulce ', imagen: '/imgs/Fotos_Perfil/GuillermoMartinez.PNG' },
