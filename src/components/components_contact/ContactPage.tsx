@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 
 export default function ContactPage() {
@@ -61,6 +60,7 @@ export default function ContactPage() {
         } else {
           setSuccessMessage('Hubo un error al enviar el correo.');
         }
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         setSuccessMessage('Error de conexión con el servidor.');
       }

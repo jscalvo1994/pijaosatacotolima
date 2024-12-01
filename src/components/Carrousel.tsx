@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 
 const images = [
-  { src: '/Sliderimg/SliderImg.jpg', alt: 'Imagen 1', caption: 'Caption 1' },
-  { src: '/Sliderimg/SliderImg.jpg', alt: 'Imagen 2', caption: 'Caption 2' },
-  { src: '/Sliderimg/SliderImg.jpg', alt: 'Imagen 3', caption: 'Caption 3' },
+  { src: '/Sliderimg/SliderImg.png', alt: 'Pijaos 1', caption: '1' },
+  // { src: '/Sliderimg/SliderImg.jpg', alt: 'Imagen 2', caption: 'Caption 2' },
+  // { src: '/Sliderimg/SliderImg.jpg', alt: 'Imagen 3', caption: 'Caption 3' },
 ];
 export default function Carrousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
