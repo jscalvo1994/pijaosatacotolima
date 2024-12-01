@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.header-custom {
+  /* Hace que el navbar quede fijo en la parte superior */
+  width: 100%; /* Ocupa todo el ancho */
+  z-index: 1000; /* Asegura que esté encima del contenido */
+  background-color: white; /* Fondo para el header */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+  display: flex;
+  flex-direction: column;
+}
+
+.main-custom {
+  flex: 1;
+  padding-top: 5rem;
+  padding-bottom: 10rem; /* Opcional: Espacio para separar del footer */
+}
+/* Estilo base para pantallas pequeñas */
+.body-custom {
+  background: linear-gradient(to bottom, #ff7eb3, #ff758f);
+  transition: background 0.5s ease-in-out;
+  min-height: 100vh; /* Asegura que ocupe al menos la altura completa de la pantalla */
+  background-repeat: no-repeat; /* Evita que el fondo se repita */
+  background-size: cover; /* Escala el fondo para cubrir toda el área */
+  background-position: center; /* Centra el fondo */
+  font-family: Arial, sans-serif; /* Fuente predeterminada */
+  margin: 0; /* Elimina márgenes adicionales */
+  padding: 0; /* Asegura un diseño limpio */
+  display: flex;
+  flex-direction: column; /* Ordena header, main y footer verticalmente */
+}
+
+@media (min-width: 768px) {
+  .body-custom {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+  }
+  .main-custom {
+  }
+}
+
+@media (min-width: 1024px) {
+  .body-custom {
+    background: linear-gradient(to bottom, #a8edea, #fed6e3);
+  }
+  .main-custom {
+  }
+}
+.footer-custom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%; /* Ocupa todo el ancho de la pantalla */
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  z-index: 1000; /* Asegura que esté encima de otros elementos */
+}
