@@ -1,12 +1,15 @@
 'use client';
+
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useSession, signOut } from 'next-auth/react';
+import { SessionProvider } from 'next-auth/react';
 
-const Navbar: React.FC = () => {
+const NavbarContent: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { data: session } = useSession();
 
-  // Función para cerrar el menú
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
@@ -37,82 +40,30 @@ const Navbar: React.FC = () => {
           <Link href="/communities" className="hover:text-green-300">
             Nuestras Comunidades
           </Link>
-          <Link href="/login" className="hover:text-green-300">
-            Login
-          </Link>
+          {session && (
+            <Link href="/dashboard" className="hover:text-green-300">
+              Dashboard
+            </Link>
+          )}
+          {session ? (
+            <button onClick={() => signOut()} className="hover:text-red-500">
+              LogOut
+            </button>
+          ) : (
+            <Link href="/login" className="hover:text-green-300">
+              Login
+            </Link>
+          )}
         </div>
-
-        {/* Mobile Menu Toggle */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden flex items-center focus:outline-none"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16m-7 6h7"
-            />
-          </svg>
-        </button>
       </div>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-gray-700 text-white space-y-2 p-4">
-          <Link
-            href="/"
-            className="block hover:text-gray-300"
-            onClick={closeMenu}
-          >
-            Home
-          </Link>
-          <Link
-            href="/about"
-            className="block hover:text-gray-300"
-            onClick={closeMenu}
-          >
-            Quiénes Somos
-          </Link>
-          <Link
-            href="/communities"
-            className="block hover:text-gray-300"
-            onClick={closeMenu}
-          >
-            Nuestras Comunidades
-          </Link>
-          <Link
-            href="/contact"
-            className="block hover:text-gray-300"
-            onClick={closeMenu}
-          >
-            Contacto
-          </Link>
-          <Link
-            href="/contact2"
-            className="block hover:text-gray-300"
-            onClick={closeMenu}
-          >
-            Contacto2
-          </Link>
-          <Link
-            href="/contact3"
-            className="block hover:text-gray-300"
-            onClick={closeMenu}
-          >
-            Contacto3
-          </Link>
-        </div>
-      )}
     </nav>
   );
 };
+
+const Navbar: React.FC = () => (
+  <SessionProvider>
+    <NavbarContent />
+  </SessionProvider>
+);
 
 export default Navbar;
