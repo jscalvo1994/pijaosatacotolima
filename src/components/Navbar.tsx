@@ -37,8 +37,8 @@ const Navbar: React.FC = () => {
           <Link href="/communities" className="hover:text-green-300">
             Nuestras Comunidades
           </Link>
-          <Link href="/contact" className="hover:text-green-300">
-            Contactanos
+          <Link href="/login" className="hover:text-green-300">
+            Login
           </Link>
         </div>
 
