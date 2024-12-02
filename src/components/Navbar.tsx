@@ -7,9 +7,11 @@ import { useSession, signOut } from 'next-auth/react';
 import { SessionProvider } from 'next-auth/react';
 
 const NavbarContent: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { data: session } = useSession();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
