@@ -1,19 +1,22 @@
 # PijaosPage
 
-PijaosPage es un proyecto web construido con **Next.js 13+**, diseñado para representar y preservar la identidad cultural y los valores de la comunidad indígena Pijao. Este proyecto utiliza **React**, **Tailwind CSS**, y una estructura modular para facilitar la escalabilidad.
+PijaosPage es un proyecto web construido con **Next.js 13+**, diseñado para representar y preservar la identidad cultural y los valores de la comunidad indígena Pijao. Este proyecto utiliza **React**, **NextAuth**, **Tailwind CSS**, y una estructura modular para facilitar la escalabilidad y la autenticación de usuarios.
 
 ---
 
 ## **Características principales**
 
-- **Acceso público**:
-  - Todas las rutas actuales son de acceso público.
+- **Autenticación de usuarios**:
+  - Inicio de sesión con Google mediante **NextAuth**.
+  - Gestión de rutas protegidas según el estado de sesión del usuario.
 - **Sección "Quiénes Somos"**:
   - Presenta la misión y visión de la comunidad.
   - Detalla los principios y valores fundamentales en formato de cards.
 - **Sección "Nuestras Comunidades"**:
   - Lista de comunidades indígenas con imágenes y enlaces específicos a cada una.
   - Una sección con videos de YouTube relacionados con la comunidad.
+- **Sección "Login" (antes "Contacto")**:
+  - Página rediseñada para gestionar el inicio de sesión de los usuarios.
 - **Diseño responsivo**:
   - Adaptado para móviles, tablets y pantallas grandes.
 - **Organización modular**:
@@ -23,97 +26,152 @@ PijaosPage es un proyecto web construido con **Next.js 13+**, diseñado para rep
 
 ## **Estructura del proyecto**
 
-src/├── app/
-│ ├── about/
-│ │ ├── page.tsx # Página "Quiénes Somos"
-│ │ └── components_about/ # Componentes específicos de esta sección
-│ │ ├── CardGrup.tsx
-│ │ ├── CardGrup2.tsx
-│ │ └── MissionVision.tsx
-│ ├── communities/
-│ │ ├── page.tsx # Página "Nuestras Comunidades"
-│ │ └── components_communities/ # Componentes específicos de esta sección
-│ │ ├── CardGroupCommunities.tsx
-│ │ ├── CardGroupVideos.tsx
-│ │ └── Carrousel.tsx
-│ ├── contact/
-│ │ └── page.tsx # Página "Contacto"
-│ ├── layout.tsx # Layout global (Navbar + Footer)
-│ ├── globals.css # Estilos globales del proyecto
-├── components/
-│ ├── Footer.tsx # Componente global Footer
-│ ├── Navbar.tsx # Componente global Navbar
-│ ├── Maps.tsx # Componente para integrar mapas
-│ ├── TeamSection.tsx # Sección para el equipo
-├── features/ # Actualmente vacío
-├── layouts/ # Actualmente vacío
-├── pages/ # Actualmente vacío
-├── tests/ # Carpeta para pruebas (vacía)
+```plaintext
+src/
+├── app/
+│   ├── about/                  # Página "Quiénes Somos"
+│   │   ├── page.tsx
+│   ├── communities/            # Página "Nuestras Comunidades"
+│   │   ├── page.tsx
+│   ├── dashboard/              # Dashboard para usuarios autenticados
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   ├── login/                  # Página de inicio de sesión
+│   │   ├── page.tsx
+│   │   ├── test/               # Pruebas relacionadas con el Login
+│   ├── layouts/                # Diseño para rutas protegidas
+│   │   ├── ProtectedRoute.tsx
+├── components/                 # Componentes globales
+│   ├── components_about/       # Componentes específicos de "Quiénes Somos"
+│   ├── components_communities/ # Componentes específicos de "Nuestras Comunidades"
+│   ├── components_contact/     # Componentes relacionados con mapas y secciones del proyecto
+│   │   ├── ContactPage.tsx
+│   │   ├── Maps.tsx
+│   │   ├── Carrousel.tsx
+│   ├── Navbar.tsx              # Barra de navegación global
+│   ├── Footer.tsx              # Pie de página global
+├── pages/
+│   ├── api/
+│   │   ├── auth/               # Configuración de NextAuth
+│   │   │   ├── [...nextauth].ts
+├── services/                   # Servicios globales del proyecto
+├── middleware.ts               # Middleware para proteger rutas
+├── globals.css                 # Estilos globales del proyecto
+
+Tecnologías utilizadas
+Framework: Next.js 13+
+Autenticación: NextAuth.js
+Frontend: React, Tailwind CSS
+Gestión de rutas protegidas: Middleware de Next.js
+Videos: Embeds de YouTube con <iframe>.
+Imágenes: Componente optimizado <Image> de Next.js.
+```
+
+Actualización del README
+Con base en tu solicitud, aquí tienes un README.md actualizado que refleja los cambios recientes, como la integración del inicio de sesión (Login), la eliminación de la funcionalidad de envío de correos, y la estructura actualizada del proyecto:
+
+markdown
+Copiar código
+
+# PijaosPage
+
+PijaosPage es un proyecto web construido con **Next.js 13+**, diseñado para representar y preservar la identidad cultural y los valores de la comunidad indígena Pijao. Este proyecto utiliza **React**, **NextAuth**, **Tailwind CSS**, y una estructura modular para facilitar la escalabilidad y la autenticación de usuarios.
 
 ---
 
-## **Tecnologías utilizadas**
+## **Características principales**
 
-- **Framework:** [Next.js 13+](https://nextjs.org/)
-- **Frontend:** React, Tailwind CSS
-- **Imágenes:** Next.js `<Image>` para optimización.
-- **Videos:** Embeds de YouTube con `<iframe>`.
+- **Autenticación de usuarios**:
+  - Inicio de sesión con Google mediante **NextAuth**.
+  - Gestión de rutas protegidas según el estado de sesión del usuario.
+- **Sección "Quiénes Somos"**:
+  - Presenta la misión y visión de la comunidad.
+  - Detalla los principios y valores fundamentales en formato de cards.
+- **Sección "Nuestras Comunidades"**:
+  - Lista de comunidades indígenas con imágenes y enlaces específicos a cada una.
+  - Una sección con videos de YouTube relacionados con la comunidad.
+- **Sección "Login" (antes "Contacto")**:
+  - Página rediseñada para gestionar el inicio de sesión de los usuarios.
+- **Diseño responsivo**:
+  - Adaptado para móviles, tablets y pantallas grandes.
+- **Organización modular**:
+  - Componentes separados por contexto para facilitar el mantenimiento.
 
 ---
 
-## **Cómo ejecutar el proyecto**
+## **Estructura del proyecto**
 
-### 1. Clonar el repositorio
+```plaintext
+src/
+├── app/
+│   ├── about/                  # Página "Quiénes Somos"
+│   │   ├── page.tsx
+│   ├── communities/            # Página "Nuestras Comunidades"
+│   │   ├── page.tsx
+│   ├── dashboard/              # Dashboard para usuarios autenticados
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   ├── login/                  # Página de inicio de sesión
+│   │   ├── page.tsx
+│   │   ├── test/               # Pruebas relacionadas con el Login
+│   ├── layouts/                # Diseño para rutas protegidas
+│   │   ├── ProtectedRoute.tsx
+├── components/                 # Componentes globales
+│   ├── components_about/       # Componentes específicos de "Quiénes Somos"
+│   ├── components_communities/ # Componentes específicos de "Nuestras Comunidades"
+│   ├── components_contact/     # Componentes relacionados con mapas y secciones del proyecto
+│   │   ├── ContactPage.tsx
+│   │   ├── Maps.tsx
+│   │   ├── Carrousel.tsx
+│   ├── Navbar.tsx              # Barra de navegación global
+│   ├── Footer.tsx              # Pie de página global
+├── pages/
+│   ├── api/
+│   │   ├── auth/               # Configuración de NextAuth
+│   │   │   ├── [...nextauth].ts
+├── services/                   # Servicios globales del proyecto
+├── middleware.ts               # Middleware para proteger rutas
+├── globals.css # Estilos globales del proyecto
 
-````bash
+- ##Tecnologías utilizadas
+Framework: Next.js 13+
+Autenticación: NextAuth.js
+Frontend: React, Tailwind CSS
+Gestión de rutas protegidas: Middleware de Next.js
+Videos: Embeds de YouTube con <iframe>.
+Imágenes: Componente optimizado <Image> de Next.js.
+Cómo ejecutar el proyecto
+
+### **1. Clonar el repositorio**
+bash
+Copiar código
 git clone https://github.com/tu-usuario/pijaospage.git
 cd pijaospage
----
-### 2. Instalar dependencias
-```bash
+###**2. Instalar dependencias**
+bash
+Copiar código
 npm install
-### 3. Iniciar servidor de desarrollo
-```bash
+###**3. Configurar variables de entorno
+Crea un archivo .env en la raíz del proyecto con las siguientes variables:
+
+plaintext
+Copiar código
+
+NEXTAUTH_SECRET=tu-clave-secreta
+NEXTAUTH_URL=http://localhost:3000
+GOOGLE_CLIENT_ID=tu-google-client-id
+GOOGLE_CLIENT_SECRET=tu-google-client-secret
+
+###**4. Iniciar servidor de desarrollo**
+bash
 npm run dev
----
-### 4. Abrir en el navegador
-Accede a http://localhost:3000.
+Abre tu navegador en http://localhost:3000.
+
+###**5. Construir para producción
+bash
+npm run build
 
 Próximos pasos
-1. Funcionalidades pendientes:
-Autenticación:
-Implementar protección para secciones privadas con NextAuth.
-Integración de mapas interactivos:
-Añadir funcionalidad en el componente Maps.tsx para mostrar ubicaciones relevantes.
-Sección de contacto:
-Diseñar e implementar un formulario de contacto funcional.
-2. Carpetas vacías por definir:
-features/:
-Para funcionalidades específicas como autenticación o lógica avanzada.
-layouts/:
-Diseños adicionales si se divide entre vistas públicas y privadas.
-tests/:
-Implementar pruebas unitarias e integrales.
-````
-
-## **Actualización reciente: Configuración de envío de correos con Nodemailer**
-
-### **1. Implementación de una API para enviar correos**
-
-Se creó una API personalizada en `src/pages/api/send-mail.ts` que utiliza **Nodemailer** para enviar correos electrónicos. Esta funcionalidad permite:
-
-- Enviar un mensaje al correo principal configurado en el archivo `.env`(configuracion local).
-- Enviar una copia del mensaje al remitente.
-
-### **2. Configuración de variables de entorno**
-
-Se añadieron nuevas variables de entorno para la configuración del transporte SMTP en el archivo `.env`. Estas variables incluyen:
-
-```env
-EMAIL_HOST=smtp.ejemplo.com
-EMAIL_PORT=587
-EMAIL_USER=tu-usuario
-EMAIL_PASS=tu-contraseña
-EMAIL_FROM=Tu Nombre <tu-email@ejemplo.com>
-En el despliegue de next se configuaran y se probaran pero si sale error se aplazara la solucion para otro momento
+-Optimización del Dashboard:
+-Mejorar la interfaz del Dashboard con métricas y personalización.
 ```
