@@ -40,25 +40,18 @@ export default NextAuth({
       return token;
     },
     async session({ session, token }) {
-      console.log('Token recibido en la sesión: nextauth.ts', token);
       session.user = {
         id: token.id as string,
         name: token.name as string,
         email: token.email as string,
-        emprendedor: token.emprendedor as number,
-        emprendimientos: token.emprendimientos as number,
+        emprendedor: Array.isArray(token.emprendedor) ? token.emprendedor : [], // Asegúrate de que sea un array
+        emprendimientos: Array.isArray(token.emprendimientos)
+          ? token.emprendimientos
+          : [], // Asegúrate de que sea un array
       };
-
-      console.log(
-        'Sesión actualizada con datos del usuario: nextauth.ts',
-        session,
-      );
       return session;
     },
     async redirect({ url, baseUrl }) {
-      console.log(`URL recibida: ${url}`);
-      console.log(`Base URL: ${baseUrl}`);
-
       if (url.includes('/api/auth/signin')) {
         console.log('Redirigiendo al Dashboard después del signin');
         return url.startsWith(baseUrl) ? url : baseUrl;
