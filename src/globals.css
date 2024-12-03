@@ -19,7 +19,7 @@
 }
 /* Estilo base para pantallas pequeñas */
 .body-custom {
-  background: linear-gradient(to bottom, #ff7eb3, #ff758f);
+  /*background: linear-gradient(to bottom, #ff7eb3, #ff758f);*/
   transition: background 0.5s ease-in-out;
   min-height: 100vh; /* Asegura que ocupe al menos la altura completa de la pantalla */
   background-repeat: no-repeat; /* Evita que el fondo se repita */
@@ -34,7 +34,7 @@
 
 @media (min-width: 768px) {
   .body-custom {
-    background: linear-gradient(to right, #6a11cb, #2575fc);
+    /* background: linear-gradient(to right, #6a11cb, #2575fc);*/
   }
   .main-custom {
   }
@@ -42,7 +42,7 @@
 
 @media (min-width: 1024px) {
   .body-custom {
-    background: linear-gradient(to bottom, #a8edea, #fed6e3);
+    /*background: linear-gradient(to bottom, #a8edea, #fed6e3);*/
   }
   .main-custom {
   }
