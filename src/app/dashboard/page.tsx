@@ -2,6 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useState, useEffect } from 'react';
 import UserCard from './components_dashboard/UserCard';
 
@@ -37,7 +38,11 @@ export default function DashboardPage() {
           email,
           image,
           emprendedor: emprendedor,
-          emprendimientos: emprendimientos,
+          emprendimiento: emprendimientos,
+        }}
+        onUpdate={(updatedData) => {
+          console.log('Datos actualizados:', updatedData);
+          // Aquí puedes manejar los datos actualizados, como enviarlos al backend
         }}
       />
     </div>

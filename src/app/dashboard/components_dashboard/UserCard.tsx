@@ -2,7 +2,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Emprendedor } from 'next-auth';
+import { Emprendedor, Emprendimiento } from 'next-auth';
 import axios from 'axios';
 
 interface UserCardProps {
@@ -11,6 +11,7 @@ interface UserCardProps {
     name: string | null | undefined;
     email: string | null | undefined;
     emprendedor: Emprendedor[];
+    emprendimiento: Emprendimiento[];
     image?: string | null;
   };
   onUpdate: (data: any) => void; // Función para manejar los datos enviados
