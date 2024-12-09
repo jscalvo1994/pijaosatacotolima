@@ -17,43 +17,37 @@ interface UserCardProps {
   onUpdate: (data: any) => void; // Función para manejar los datos enviados
 }
 
-interface TipoDocumento {
-  id: number;
-  nombre: string;
-}
-
 const UserCard: React.FC<UserCardProps> = ({ user, onUpdate }) => {
   const [showIframe, setShowIframe] = useState(false);
-  const [tipoDocumentos, setTipoDocumentos] = useState<TipoDocumento[]>([]);
+  const [tipoDocumentos, setTipoDocumentos] = useState<any[]>([]);
+  const [sexos, setSexos] = useState<any[]>([]);
+  const [nivelesEducativos, setNivelesEducativos] = useState<any[]>([]);
+  const [departamentos, setDepartamentos] = useState<any[]>([]);
+  const [minorias, setMinorias] = useState<any[]>([]);
 
-  // Fetch de tipos de documentos
+  // Fetch de datos para los select
   useEffect(() => {
-    const fetchTipoDocumentos = async () => {
+    const fetchData = async () => {
       try {
-        console.log('Intentando realizar la consulta GET a la API...');
-        const response = await axios.get(
-          'https://dfwh-5ca5356b291e.herokuapp.com/send/tipo_documento',
-        );
-        console.log('Respuesta de la API recibida:', response.data);
+        const responses = await Promise.all([
+          axios.get('/api/send/tipo_documento'),
+          axios.get('/api/send/sexo'),
+          axios.get('/api/send/nivel_educativo'),
+          axios.get('/api/send/departamento'),
+          axios.get('/api/send/minoria'),
+        ]);
 
-        // Validación de formato de datos
-        if (Array.isArray(response.data)) {
-          console.log(
-            'El formato de datos es un array, guardando en el estado...',
-          );
-          setTipoDocumentos(response.data);
-        } else {
-          console.warn(
-            'El formato de los datos recibidos no es un array. Respuesta:',
-            response.data,
-          );
-        }
+        setTipoDocumentos(responses[0].data);
+        setSexos(responses[1].data);
+        setNivelesEducativos(responses[2].data);
+        setDepartamentos(responses[3].data);
+        setMinorias(responses[4].data);
       } catch (error) {
-        console.error('Error al cargar tipos de documentos:', error);
+        console.error('Error al cargar datos:', error);
       }
     };
 
-    fetchTipoDocumentos();
+    fetchData();
   }, []);
 
   // Datos prellenados para el formulario en el iframe
@@ -65,6 +59,12 @@ const UserCard: React.FC<UserCardProps> = ({ user, onUpdate }) => {
     email: user.email || '',
     id_google: user.id,
     fecha_nacimiento: user.emprendedor[0]?.fecha_nacimiento || '',
+    id_departamento_nacimiento: 0,
+    id_ciudad_nacimiento: 1,
+    id_departamento_residencia: 2,
+    id_ciudad_residencia: 2,
+    id_minoria: 3,
+    id_nivel_educativo: user.emprendedor[0]?.id_nivel_educativo || 1,
   };
 
   // Escucha los mensajes enviados desde el iframe
@@ -102,6 +102,29 @@ const UserCard: React.FC<UserCardProps> = ({ user, onUpdate }) => {
         </div>
         <div>
           <strong>Fecha de Nacimiento:</strong> {prefilledData.fecha_nacimiento}
+        </div>
+        <div>
+          <strong>Ciudad de Nacimiento:</strong>{' '}
+          {prefilledData.id_ciudad_nacimiento}
+        </div>
+        <div>
+          <strong>Departamento de Nacimiento:</strong>{' '}
+          {prefilledData.id_departamento_nacimiento}
+        </div>
+        <div>
+          <strong>Departamento de residencia:</strong>{' '}
+          {prefilledData.id_departamento_residencia}
+        </div>
+        <div>
+          <strong>Ciudad de residencia:</strong>{' '}
+          {prefilledData.id_ciudad_residencia}
+        </div>
+        <div>
+          <strong>Minoria Perteneciente:</strong> {prefilledData.id_minoria}
+        </div>
+        <div>
+          <strong>Nivel Educativo Actual</strong>{' '}
+          {prefilledData.id_nivel_educativo}
         </div>
 
         {/* Botón para mostrar el iframe */}
@@ -155,6 +178,30 @@ const UserCard: React.FC<UserCardProps> = ({ user, onUpdate }) => {
                       <label>Documento</label>
                       <input type="text" name="documento" value="${prefilledData.documento}" required />
 
+                      <label>Sexo</label>
+                      <select name="id_sexo" required>
+                        ${sexos
+                          .map(
+                            (sexo) =>
+                              `<option value="${sexo.id}">${sexo.nombre}</option>`,
+                          )
+                          .join('')}
+                      </select>
+
+                      <label>Nivel Educativo</label>
+                      <select name="id_nivel_educativo" required>
+                        ${nivelesEducativos
+                          .map(
+                            (nivel) =>
+                              `<option value="${nivel.id}" ${
+                                nivel.id === prefilledData.id_nivel_educativo
+                                  ? 'selected'
+                                  : ''
+                              }>${nivel.nombre}</option>`,
+                          )
+                          .join('')}
+                      </select>
+
                       <label>Nombre</label>
                       <input type="text" name="nombre" value="${prefilledData.nombre}" required />
 
@@ -166,6 +213,26 @@ const UserCard: React.FC<UserCardProps> = ({ user, onUpdate }) => {
 
                       <label>Fecha de Nacimiento</label>
                       <input type="date" name="fecha_nacimiento" value="${prefilledData.fecha_nacimiento}" required />
+
+                      <label>Departamento de Nacimiento</label>
+                      <select name="id_departamento_nacimiento" required>
+                        ${departamentos
+                          .map(
+                            (departamento) =>
+                              `<option value="${departamento.id}">${departamento.nombre}</option>`,
+                          )
+                          .join('')}
+                      </select>
+
+                      <label>Minoría</label>
+                      <select name="id_minoria" required>
+                        ${minorias
+                          .map(
+                            (minoria) =>
+                              `<option value="${minoria.id}">${minoria.nombre}</option>`,
+                          )
+                          .join('')}
+                      </select>
 
                       <button type="button" onclick="submitForm()">Actualizar</button>
                     </form>
@@ -181,7 +248,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, onUpdate }) => {
                 </html>`}
               style={{
                 width: '100%',
-                height: '400px',
+                height: '600px',
                 border: '1px solid #ddd',
               }}
             />

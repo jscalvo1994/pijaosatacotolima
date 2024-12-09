@@ -47,6 +47,7 @@ declare module 'next-auth' {
     nombre: string;
     sexo: string;
     telefono: string;
+    id_nivel_educativo: Integer;
   }
 
   interface Emprendimiento {

@@ -1,0 +1,60 @@
+https://dfwh-5ca5356b291e.herokuapp.com/send/ciiu
+[
+    {
+        "id": 5,
+        "nombre": "A - Agricultura, Ganadería, Caza y Silvicultura"
+    },
+    {
+        "id": 6,
+        "nombre": "B - Pesca"
+    },
+    {
+        "id": 7,
+        "nombre": "C - Explotación de Minas y Canteras"
+    },
+    {
+        "id": 8,
+        "nombre": "D - Industria Manufacturera"
+    },
+
+]
+GET https://dfwh-5ca5356b291e.herokuapp.com/send/tipo_clima
+[
+    {
+        "id": 1,
+        "nombre": "Cálido"
+    },
+    {
+        "id": 2,
+        "nombre": "Templado"
+    },
+    {
+        "id": 3,
+        "nombre": "Frío"
+    },
+
+]
+GET https://dfwh-5ca5356b291e.herokuapp.com/send/departamento
+[
+   
+    {
+        "id": 70,
+        "nombre": "SUCRE"
+    },
+    {
+        "id": 73,
+        "nombre": "TOLIMA"
+    },
+    {
+        "id": 76,
+        "nombre": "VALLE DEL CAUCA"
+    },
+    {
+        "id": 97,
+        "nombre": "VAUPES"
+    },
+    {
+        "id": 99,
+        "nombre": "VICHADA"
+    }
+]

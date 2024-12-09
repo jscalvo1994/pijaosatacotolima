@@ -19,6 +19,7 @@ export default NextAuth({
         });
 
         try {
+          console.log('Este es nextauth. envio de datos', account);
           const response = await axios.post(
             'https://dfwh-5ca5356b291e.herokuapp.com/receive/auth',
             {

@@ -44,7 +44,7 @@ const NavbarContent: React.FC = () => {
           </Link>
           {session && (
             <Link href="/dashboard" className="hover:text-green-300">
-              Dashboard
+              Panel administrador
             </Link>
           )}
           {session ? (
