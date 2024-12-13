@@ -58,12 +58,13 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/api/send/minoria',
-        destination: 'https://dfwh-5ca5356b291e.herokuapp.com/send/minoria',
+        destination:
+          'https://dfwh-5ca5356b291e.herokuapp.com/send/tipo_minoria',
       },
       {
         source: '/api/send/departamento',
         destination:
-          'https://dfwh-5ca5356b291e.herokuapp.com/send/departamento',
+          'https://dfwh-5ca5356b291e.herokuapp.com/send/tipo_departamento',
       },
       {
         source: '/api/send/ciiu',

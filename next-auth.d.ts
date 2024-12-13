@@ -10,6 +10,8 @@ declare module 'next-auth' {
       image?: string | null;
       emprendedor: Emprendedor[]; // Cambiado a un array de objetos
       emprendimientos: Emprendimiento[]; // Cambiado a un array de objetos
+      n_emprendedor: number;
+      n_emprendimientos: number;
     };
   }
 
@@ -20,6 +22,8 @@ declare module 'next-auth' {
     image?: string | null;
     emprendedor: Emprendedor[]; // Cambiado a un array de objetos
     emprendimientos: Emprendimiento[]; // Cambiado a un array de objetos
+    n_emprendedor: number;
+    n_emprendimientos: number;
   }
 
   interface JWT {

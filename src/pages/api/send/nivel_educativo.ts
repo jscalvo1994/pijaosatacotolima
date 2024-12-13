@@ -8,7 +8,7 @@ export default async function handler(
   try {
     console.log('nivel_educativo');
     const response = await axios.get(
-      'https://dfwh-5ca5356b291e.herokuapp.com/send/nivel_educativo',
+      'https://dfwh-5ca5356b291e.herokuapp.com/send/tipo_nivel_educativo',
     );
     res.status(200).json(response.data);
   } catch (error) {

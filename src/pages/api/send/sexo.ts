@@ -8,7 +8,7 @@ export default async function handler(
   try {
     console.log('sexo');
     const response = await axios.get(
-      'https://dfwh-5ca5356b291e.herokuapp.com/send/sexo',
+      'https://dfwh-5ca5356b291e.herokuapp.com/send/tipo_sexo',
     );
     res.status(200).json(response.data);
   } catch (error) {
