@@ -33,6 +33,8 @@ declare module 'next-auth' {
     picture?: string;
     emprendedor?: Emprendedor[]; // Cambiado a un array de objetos
     emprendimientos?: Emprendimiento[]; // Cambiado a un array de objetos
+    n_emprendedor?: n_emprendedor;
+    n_emprendimientos: n_emprendimientos;
   }
 
   interface Emprendedor {

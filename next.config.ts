@@ -71,9 +71,19 @@ const nextConfig: NextConfig = {
         destination: 'https://dfwh-5ca5356b291e.herokuapp.com/send/ciiu',
       },
       {
-        source: '/api/send/alcance_emprendimiento',
+        source: '/api/send/alcance_emprendimientos',
         destination:
           'https://dfwh-5ca5356b291e.herokuapp.com/send/alcance_emprendimiento',
+      },
+      {
+        source: '/api/send/emprendimientos',
+        destination:
+          'https://dfwh-5ca5356b291e.herokuapp.com/receive/emprendimiento_xid',
+      },
+      {
+        source: '/api/update/update_emprendedor',
+        destination:
+          'https://dfwh-5ca5356b291e.herokuapp.com/receive/emprendedor',
       },
     ];
   },

@@ -2,7 +2,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import UpdateUser from './UpdateUser';
+//import UpdateUser from './UpdateUser';
 
 interface UserCardProps {
   user: {
@@ -16,7 +16,7 @@ interface UserCardProps {
   onUpdate: (data: any) => void; // Función para manejar los datos enviados
 }
 
-const UserCard: React.FC<UserCardProps> = ({ user, onUpdate }) => {
+const UserCard: React.FC<UserCardProps> = ({ user }) => {
   const [showUpdateForm, setShowUpdateForm] = useState(false);
 
   const emprendedor = user.emprendedor[0] || {};
@@ -84,7 +84,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, onUpdate }) => {
           {showUpdateForm ? 'Cerrar Formulario' : 'Actualizar Datos'}
         </button>
 
-        {showUpdateForm && (
+        {/*      {showUpdateForm && (
           <UpdateUser
             prefilledData={prefilledData}
             onSubmit={(data) => {
@@ -94,7 +94,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, onUpdate }) => {
             }}
             onCancel={() => setShowUpdateForm(false)} // Cierra el formulario al cancelar
           />
-        )}
+        ) */}
       </div>
     </div>
   );

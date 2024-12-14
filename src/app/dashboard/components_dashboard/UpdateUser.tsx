@@ -6,13 +6,13 @@ import axios from 'axios';
 
 interface UpdateUserProps {
   prefilledData: any;
-  onSubmit: (data: any) => void;
-  onCancel: () => void; // Nueva función para manejar la cancelación
+  onSuccess: () => void; // Callback después de enviar exitosamente
+  onCancel: () => void; // Manejar la cancelación
 }
 
 const UpdateUser: React.FC<UpdateUserProps> = ({
   prefilledData,
-  onSubmit,
+  onSuccess,
   onCancel,
 }) => {
   const [tipoDocumentos, setTipoDocumentos] = useState<any[]>([]);
@@ -21,8 +21,8 @@ const UpdateUser: React.FC<UpdateUserProps> = ({
   const [departamentos, setDepartamentos] = useState<any[]>([]);
   const [minorias, setMinorias] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Fetch inicial de los datos necesarios para el formulario
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,8 +39,9 @@ const UpdateUser: React.FC<UpdateUserProps> = ({
         setNivelesEducativos(responses[2].data);
         setDepartamentos(responses[3].data);
         setMinorias(responses[4].data);
-      } catch (error) {
-        console.error('Error al cargar datos:', error);
+      } catch (err) {
+        console.error('Error al cargar datos:', err);
+        setError('Ocurrió un error al cargar los datos.');
       } finally {
         setLoading(false);
       }
@@ -49,206 +50,311 @@ const UpdateUser: React.FC<UpdateUserProps> = ({
     fetchData();
   }, []);
 
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  /*   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const data = Object.fromEntries(formData);
-    onSubmit(data); // Envía los datos actualizados al componente padre
-  };
+    setError(null);
 
+    try {
+      const form = event.currentTarget;
+
+      // Preparar los datos del JSON directamente desde el formulario
+      const data = {
+        id_documento: Number(form.id_documento.value),
+        documento: form.documento.value,
+        id_sexo: Number(form.id_sexo.value),
+        nombre: form.nombre.value,
+        apellido: form.apellido.value,
+        telefono: form.telefono.value,
+        email: prefilledData.email, // Dato fijo
+        id_google: prefilledData.id_google, // Dato fijo
+        id_nivel_educativo: Number(form.id_nivel_educativo.value),
+        fecha_nacimiento: form.fecha_nacimiento.value || null,
+        id_departamento_nacimiento: Number(
+          form.id_departamento_nacimiento.value,
+        ),
+        id_ciudad_nacimiento: Number(form.id_ciudad_nacimiento.value),
+        id_departamento_residencia: Number(
+          form.id_departamento_residencia.value,
+        ),
+        id_ciudad_residencia: Number(form.id_ciudad_residencia.value),
+        id_minoria: Number(form.id_minoria.value),
+      };
+
+      console.log('Datos enviados al backend:', data);
+
+      // Enviar los datos al backend
+      const response = await axios.post('/api/update/update_emprendedor', data);
+      console.log('Datos enviados exitosamente:', response.data);
+
+      onSuccess(); // Notificar al componente padre del éxito
+    } catch (err) {
+      console.log('Error al enviar los datos:', err);
+      setError(
+        'Ocurrió un error al enviar los datos. Por favor, inténtalo nuevamente.',
+      );
+    }
+  }; */
+  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError(null);
+
+    try {
+      const form = event.currentTarget;
+
+      // Preparar los datos del JSON directamente desde el formulario
+      const data = {
+        id_documento: Number(form.id_documento.value),
+        documento: form.documento.value,
+        id_sexo: Number(form.id_sexo.value),
+        nombre: form.nombre.value,
+        apellido: form.apellido.value,
+        telefono: form.telefono.value,
+        email: prefilledData.email, // Dato fijo
+        id_google: prefilledData.id_google, // Dato fijo
+        id_nivel_educativo: Number(form.id_nivel_educativo.value),
+        fecha_nacimiento: form.fecha_nacimiento.value || null,
+        id_departamento_nacimiento: Number(
+          form.id_departamento_nacimiento.value,
+        ),
+        id_ciudad_nacimiento: Number(form.id_ciudad_nacimiento.value),
+        id_departamento_residencia: Number(
+          form.id_departamento_residencia.value,
+        ),
+        id_ciudad_residencia: Number(form.id_ciudad_residencia.value),
+        id_minoria: Number(form.id_minoria.value),
+      };
+
+      console.log('Datos enviados al backend:', data);
+
+      // Enviar los datos al backend
+      const response = await axios.post('/api/update/update_emprendedor', data);
+      console.log('Datos enviados exitosamente:', response.data);
+
+      onSuccess(); // Notificar al componente padre del éxito
+    } catch (err) {
+      console.log('Error al enviar los datos:', err);
+      setError(
+        'Ocurrió un error al enviar los datos. Por favor, inténtalo nuevamente.',
+      );
+    }
+  };
   if (loading) {
     return <p>Cargando datos...</p>;
   }
 
+  if (error) {
+    return <p className="text-red-500">{error}</p>;
+  }
+
   return (
-    <div className="bg-white shadow-md rounded-lg p-6">
-      <h2 className="text-xl font-semibold mb-4">Actualizar Datos</h2>
-      <form onSubmit={handleFormSubmit} className="space-y-4">
-        <div className="flex flex-col">
-          <label htmlFor="id_documento" className="mb-2 font-semibold">
-            Tipo de Documento
-          </label>
-          <select
-            id="id_documento"
-            name="id_documento"
-            required
-            defaultValue={prefilledData.id_documento}
-            className="border rounded px-3 py-2"
-          >
-            {tipoDocumentos.map((tipo) => (
-              <option key={tipo.id} value={tipo.id}>
-                {tipo.nombre}
-              </option>
-            ))}
-          </select>
-        </div>
+    <form onSubmit={handleFormSubmit} className="space-y-4">
+      {/* Campos visibles */}
+      <div>
+        <label className="block mb-1 font-semibold">Nombre</label>
+        <input
+          type="text"
+          name="nombre"
+          defaultValue={prefilledData.nombre || ''}
+          required
+          className="w-full border rounded px-3 py-2"
+        />
+      </div>
 
-        <div className="flex flex-col">
-          <label htmlFor="documento" className="mb-2 font-semibold">
-            Documento
-          </label>
-          <input
-            id="documento"
-            type="text"
-            name="documento"
-            defaultValue={prefilledData.documento}
-            required
-            className="border rounded px-3 py-2"
-          />
-        </div>
+      <div>
+        <label className="block mb-1 font-semibold">Apellido</label>
+        <input
+          type="text"
+          name="apellido"
+          defaultValue={prefilledData.apellido || ''}
+          required
+          className="w-full border rounded px-3 py-2"
+        />
+      </div>
 
-        <div className="flex flex-col">
-          <label htmlFor="id_sexo" className="mb-2 font-semibold">
-            Sexo
-          </label>
-          <select
-            id="id_sexo"
-            name="id_sexo"
-            required
-            defaultValue={prefilledData.id_sexo}
-            className="border rounded px-3 py-2"
-          >
-            {sexos.map((sexo) => (
-              <option key={sexo.id} value={sexo.id}>
-                {sexo.nombre}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div>
+        <label className="block mb-1 font-semibold">Tipo de Documento</label>
+        <select
+          name="id_documento"
+          defaultValue={prefilledData.id_documento || ''}
+          required
+          className="w-full border rounded px-3 py-2"
+        >
+          <option value="">Seleccione</option>
+          {tipoDocumentos.map((doc) => (
+            <option key={doc.id} value={doc.id}>
+              {doc.nombre}
+            </option>
+          ))}
+        </select>
+      </div>
 
-        <div className="flex flex-col">
-          <label htmlFor="id_nivel_educativo" className="mb-2 font-semibold">
-            Nivel Educativo
-          </label>
-          <select
-            id="id_nivel_educativo"
-            name="id_nivel_educativo"
-            required
-            defaultValue={prefilledData.id_nivel_educativo}
-            className="border rounded px-3 py-2"
-          >
-            {nivelesEducativos.map((nivel) => (
-              <option key={nivel.id} value={nivel.id}>
-                {nivel.nombre}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div>
+        <label className="block mb-1 font-semibold">Documento</label>
+        <input
+          type="text"
+          name="documento"
+          defaultValue={prefilledData.documento || ''}
+          required
+          className="w-full border rounded px-3 py-2"
+        />
+      </div>
 
-        <div className="flex flex-col">
-          <label htmlFor="nombre" className="mb-2 font-semibold">
-            Nombre
-          </label>
-          <input
-            id="nombre"
-            type="text"
-            name="nombre"
-            defaultValue={prefilledData.nombre}
-            required
-            className="border rounded px-3 py-2"
-          />
-        </div>
+      <div>
+        <label className="block mb-1 font-semibold">Teléfono</label>
+        <input
+          type="text"
+          name="telefono"
+          defaultValue={prefilledData.telefono || ''}
+          required
+          className="w-full border rounded px-3 py-2"
+        />
+      </div>
 
-        <div className="flex flex-col">
-          <label htmlFor="telefono" className="mb-2 font-semibold">
-            Teléfono
-          </label>
-          <input
-            id="telefono"
-            type="text"
-            name="telefono"
-            defaultValue={prefilledData.telefono}
-            required
-            className="border rounded px-3 py-2"
-          />
-        </div>
+      <div>
+        <label className="block mb-1 font-semibold">Sexo</label>
+        <select
+          name="id_sexo"
+          defaultValue={prefilledData.id_sexo || ''}
+          required
+          className="w-full border rounded px-3 py-2"
+        >
+          <option value="">Seleccione</option>
+          {sexos.map((sexo) => (
+            <option key={sexo.id} value={sexo.id}>
+              {sexo.nombre}
+            </option>
+          ))}
+        </select>
+      </div>
 
-        <div className="flex flex-col">
-          <label htmlFor="email" className="mb-2 font-semibold">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            defaultValue={prefilledData.email}
-            disabled
-            className="border rounded px-3 py-2 bg-gray-100 cursor-not-allowed"
-          />
-        </div>
+      <div>
+        <label className="block mb-1 font-semibold">Fecha de Nacimiento</label>
+        <input
+          type="date"
+          name="fecha_nacimiento"
+          defaultValue={prefilledData.fecha_nacimiento || ''}
+          required
+          className="w-full border rounded px-3 py-2"
+        />
+      </div>
 
-        <div className="flex flex-col">
-          <label htmlFor="fecha_nacimiento" className="mb-2 font-semibold">
-            Fecha de Nacimiento
-          </label>
-          <input
-            id="fecha_nacimiento"
-            type="date"
-            name="fecha_nacimiento"
-            defaultValue={prefilledData.fecha_nacimiento}
-            required
-            className="border rounded px-3 py-2"
-          />
-        </div>
+      <div>
+        <label className="block mb-1 font-semibold">Nivel Educativo</label>
+        <select
+          name="id_nivel_educativo"
+          defaultValue={prefilledData.id_nivel_educativo || ''}
+          required
+          className="w-full border rounded px-3 py-2"
+        >
+          <option value="">Seleccione</option>
+          {nivelesEducativos.map((nivel) => (
+            <option key={nivel.id} value={nivel.id}>
+              {nivel.nombre}
+            </option>
+          ))}
+        </select>
+      </div>
 
-        <div className="flex flex-col">
-          <label
-            htmlFor="id_departamento_nacimiento"
-            className="mb-2 font-semibold"
-          >
-            Departamento de Nacimiento
-          </label>
-          <select
-            id="id_departamento_nacimiento"
-            name="id_departamento_nacimiento"
-            required
-            defaultValue={prefilledData.id_departamento_nacimiento}
-            className="border rounded px-3 py-2"
-          >
-            {departamentos.map((departamento) => (
-              <option key={departamento.id} value={departamento.id}>
-                {departamento.nombre}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div>
+        <label className="block mb-1 font-semibold">
+          Departamento de Nacimiento
+        </label>
+        <select
+          name="id_departamento_nacimiento"
+          defaultValue={prefilledData.id_departamento_nacimiento || ''}
+          required
+          className="w-full border rounded px-3 py-2"
+        >
+          <option value="">Seleccione</option>
+          {departamentos.map((dep) => (
+            <option key={dep.id} value={dep.id}>
+              {dep.nombre}
+            </option>
+          ))}
+        </select>
+      </div>
 
-        <div className="flex flex-col">
-          <label htmlFor="id_minorias" className="mb-2 font-semibold">
-            Minoría Perteneciente
-          </label>
-          <select
-            id="id_minorias"
-            name="id_minorias"
-            required
-            defaultValue={prefilledData.minorias}
-            className="border rounded px-3 py-2"
-          >
-            {minorias.map((minoria) => (
-              <option key={minoria.id} value={minoria.id}>
-                {minoria.nombre}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div>
+        <label className="block mb-1 font-semibold">Ciudad de Nacimiento</label>
+        <input
+          type="text"
+          name="id_ciudad_nacimiento"
+          defaultValue={prefilledData.id_ciudad_nacimiento || ''}
+          required
+          className="w-full border rounded px-3 py-2"
+        />
+      </div>
 
-        <div className="mt-4 flex space-x-4">
-          <button
-            type="submit"
-            className="px-4 py-2 bg-blue-500 text-white rounded"
-          >
-            Actualizar
-          </button>
-          <button
-            type="button"
-            onClick={onCancel} // Llama a la función para manejar la cancelación
-            className="px-4 py-2 bg-gray-500 text-white rounded"
-          >
-            Cancelar
-          </button>
-        </div>
-      </form>
-    </div>
+      <div>
+        <label className="block mb-1 font-semibold">
+          Departamento de Residencia
+        </label>
+        <select
+          name="id_departamento_residencia"
+          defaultValue={prefilledData.id_departamento_residencia || ''}
+          required
+          className="w-full border rounded px-3 py-2"
+        >
+          <option value="">Seleccione</option>
+          {departamentos.map((dep) => (
+            <option key={dep.id} value={dep.id}>
+              {dep.nombre}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label className="block mb-1 font-semibold">Ciudad de Residencia</label>
+        <input
+          type="text"
+          name="id_ciudad_residencia"
+          defaultValue={prefilledData.id_ciudad_residencia || ''}
+          required
+          className="w-full border rounded px-3 py-2"
+        />
+      </div>
+
+      <div>
+        <label className="block mb-1 font-semibold">Minoría</label>
+        <select
+          name="id_minoria"
+          defaultValue={prefilledData.id_minoria || ''}
+          required
+          className="w-full border rounded px-3 py-2"
+        >
+          <option value="">Seleccione</option>
+          {minorias.map((minoria) => (
+            <option key={minoria.id} value={minoria.id}>
+              {minoria.nombre}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Campos ocultos */}
+      <input type="hidden" name="email" value={prefilledData.email || ''} />
+      <input
+        type="hidden"
+        name="id_google"
+        value={prefilledData.id_google || ''}
+      />
+
+      {/* Botones */}
+      <button
+        type="submit"
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        Actualizar
+      </button>
+      <button
+        type="button"
+        onClick={onCancel}
+        className="mt-4 ml-2 px-4 py-2 bg-gray-500 text-white rounded"
+      >
+        Cancelar
+      </button>
+    </form>
   );
 };
 
