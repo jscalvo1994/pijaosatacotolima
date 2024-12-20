@@ -6,7 +6,6 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   try {
-    console.log('tipo_marketing_general');
     const response = await axios.get(
       'https://dfwh-5ca5356b291e.herokuapp.com/send/tipo_marketing_general',
     );

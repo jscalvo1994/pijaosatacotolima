@@ -10,7 +10,6 @@ export default async function handler(
     const response = await axios.get(
       'https://dfwh-5ca5356b291e.herokuapp.com/send/tipo_documento',
     );
-    console.log('tipo_documento', response.data);
     res.status(200).json(response.data);
   } catch (error) {
     console.error('Error al obtener tipos de documento:', error);

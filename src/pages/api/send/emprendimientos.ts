@@ -11,8 +11,6 @@ export default async function handler(
   }
 
   const { id_emprendimiento } = req.body;
-  console.log('ID recibido del cliente:', req.body);
-  console.log('JSON enviado al backend:', { id_emprendimiento });
   if (!id_emprendimiento) {
     return res
       .status(400)

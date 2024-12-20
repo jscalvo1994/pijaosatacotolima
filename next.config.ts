@@ -85,6 +85,16 @@ const nextConfig: NextConfig = {
         destination:
           'https://dfwh-5ca5356b291e.herokuapp.com/receive/emprendedor',
       },
+      {
+        source: '/api/update/Empleado',
+        destination:
+          'https://dfwh-5ca5356b291e.herokuapp.com/receive/empleado_xid',
+      },
+      {
+        source: '/api/update/InfrFisicaLocal',
+        destination:
+          'https://dfwh-5ca5356b291e.herokuapp.com/receive/infr_fisica_terreno_xid',
+      },
     ];
   },
 };
