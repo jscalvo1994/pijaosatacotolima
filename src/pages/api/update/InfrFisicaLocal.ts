@@ -11,44 +11,84 @@ const handler = async (req: Request) => {
     const body = await req.json();
     console.log('Cuerpo recibido:', body);
 
-    // Extraer los terrenos del cuerpo
-    const { terrenos } = body;
+    // Extraer el ID y el tipo del cuerpo
+    const { id, tipo } = body;
+    console.log('ID:', id, 'Tipo:', tipo);
 
-    if (!terrenos || !Array.isArray(terrenos)) {
-      throw new Error('El cuerpo no contiene un array válido de terrenos');
+    if (!id || !tipo) {
+      throw new Error('ID o tipo no proporcionado en la solicitud');
     }
 
-    // Procesar cada terreno y obtener detalles
-    const terrenoDetallesPromises = terrenos.map(
-      async (terreno: { id: number }) => {
-        const response = await fetch(
-          'https://dfwh-5ca5356b291e.herokuapp.com/receive/infr_fisica_terreno_xid',
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id_infr_fisica_terreno: terreno.id }),
-          },
-        );
+    console.log('Procesando ID:', id, 'para tipo:', tipo);
 
-        if (!response.ok) {
-          throw new Error(
-            `Error al obtener detalles del terreno con ID: ${terreno.id}`,
-          );
-        }
+    // Seleccionar el endpoint y el cuerpo de la solicitud basado en el tipo
+    let endpoint = '';
+    let requestBody = {};
 
-        const data = await response.json();
-        return { id: terreno.id, ...data[0] }; // Agregar el ID original al detalle
-      },
-    );
+    switch (tipo) {
+      case 'terrenos':
+        endpoint =
+          'https://dfwh-5ca5356b291e.herokuapp.com/receive/infr_fisica_terreno_xid';
+        requestBody = { id_infr_fisica_terreno: id };
+        break;
 
-    const terrenosDetalles = await Promise.all(terrenoDetallesPromises);
+      case 'vehículos':
+        endpoint =
+          'https://dfwh-5ca5356b291e.herokuapp.com/receive/infr_fisica_vehiculo_xid';
+        requestBody = { id_infr_fisica_vehiculo: id };
+        break;
 
-    return new Response(JSON.stringify(terrenosDetalles), {
+      case 'locales':
+        endpoint =
+          'https://dfwh-5ca5356b291e.herokuapp.com/receive/infr_fisica_local_xid';
+        requestBody = { id_infr_fisica_local: id };
+        break;
+
+      case 'servicios publicos':
+        endpoint =
+          'https://dfwh-5ca5356b291e.herokuapp.com/receive/infr_fisica_serv_pub_xid';
+        requestBody = { id_infr_fisica_serv_pub: id };
+        break;
+
+      default:
+        throw new Error(`Tipo no reconocido: ${tipo}`);
+    }
+
+    console.log('Realizando consulta al endpoint:', endpoint);
+
+    // Realizar la consulta al endpoint seleccionado
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(requestBody),
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Error al obtener detalles para el tipo: ${tipo}, ID: ${id}`,
+      );
+    }
+
+    const data = await response.json();
+    console.log('Datos obtenidos:', data);
+
+    // Formatear los datos en el backend: excluir "id" y preparar para el frontend
+    const formattedData = Object.entries(data[0])
+      .filter(([key]) => key.toLowerCase() !== 'id') // Excluir campo ID
+      .map(([key, value]) => ({
+        label: key.charAt(0).toUpperCase() + key.slice(1), // Capitalizar clave
+        value:
+          typeof value === 'object'
+            ? JSON.stringify(value)
+            : value || 'No disponible', // Asegurar formato string
+      }));
+
+    return new Response(JSON.stringify(formattedData), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error: any) {
-    console.error(error.message);
+    console.error('Error en el handler:', error.message);
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },

@@ -95,6 +95,21 @@ const nextConfig: NextConfig = {
         destination:
           'https://dfwh-5ca5356b291e.herokuapp.com/receive/infr_fisica_terreno_xid',
       },
+      {
+        source: '/api/update/InfrFisicaLocal',
+        destination:
+          'https://dfwh-5ca5356b291e.herokuapp.com/receive/infr_fisica_vehiculo_xid',
+      },
+      {
+        source: '/api/update/InfrFisicaLocal',
+        destination:
+          'https://dfwh-5ca5356b291e.herokuapp.com/receive/infr_fisica_local_xid',
+      },
+      {
+        source: '/api/update/InfrFisicaLocal',
+        destination:
+          'https://dfwh-5ca5356b291e.herokuapp.com/receive/infr_fisica_serv_pub_xid',
+      },
     ];
   },
 };

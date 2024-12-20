@@ -11,11 +11,38 @@ interface InfFisicaProps {
 }
 
 const InfFisica: React.FC<InfFisicaProps> = ({ infrFisica }) => {
-  const [detalle, setDetalle] = useState<any | null>(null);
+  const [detalle, setDetalle] = useState<any[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Consolidar los datos en un solo objeto
+  const fetchDetalles = async (id: number, tipo: string) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/update/InfrFisicaLocal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id, tipo }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error en la solicitud');
+      }
+
+      const data = await response.json();
+      console.log('Datos recibidos del endpoint:', data);
+      setDetalle(Array.isArray(data) ? data : [data]);
+    } catch (error) {
+      console.error('Error en fetchDetalles:', error);
+      setError('No se pudo obtener los detalles de la infraestructura');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const consolidatedData = infrFisica.reduce(
     (acc, item) => {
       Object.keys(item).forEach((key) => {
@@ -39,32 +66,7 @@ const InfFisica: React.FC<InfFisicaProps> = ({ infrFisica }) => {
     },
   );
 
-  const fetchDetalles = async (id: number, tipo: string) => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await fetch('/api/update/InfrFisicaLocal', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id, tipo }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Error en la solicitud');
-      }
-
-      const data = await response.json();
-      setDetalle(data);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
-      setError('No se pudo obtener los detalles de la infraestructura');
-    } finally {
-      setLoading(false);
-    }
-  };
+  console.log('Estado detalle en render:', detalle);
 
   return (
     <div className="mt-4 p-4 bg-gray-100 rounded-lg">
@@ -89,23 +91,21 @@ const InfFisica: React.FC<InfFisicaProps> = ({ infrFisica }) => {
 
       {loading && <p>Cargando...</p>}
       {error && <p className="text-red-500">{error}</p>}
-
-      {detalle && (
+      {detalle && detalle.length > 0 ? (
         <div className="mt-4 bg-white p-4 shadow-md rounded-lg">
           <h4 className="font-semibold">Detalles</h4>
-          <ul>
-            {detalle.map((info: any, index: number) => (
-              <li key={index} className="mb-2">
-                <p>
-                  <strong>Tipo:</strong> {info.tipo}
-                </p>
-                <p>
-                  <strong>Descripción:</strong> {info.descripcion}
-                </p>
-              </li>
-            ))}
+          <ul className="list-disc pl-5">
+            {detalle.map(
+              (item: { label: string; value: string }, index: number) => (
+                <li key={index} className="mb-1">
+                  <strong>{item.label}:</strong> {item.value}
+                </li>
+              ),
+            )}
           </ul>
         </div>
+      ) : (
+        !loading && <p>No hay detalles para mostrar.</p>
       )}
     </div>
   );

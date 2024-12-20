@@ -3,6 +3,8 @@ export const config = {
 };
 
 const handler = async (req: Request) => {
+  const body = await req.json();
+  console.log('Cuerpo recibido:', body);
   try {
     const { id_maquinaria } = await req.json();
 
