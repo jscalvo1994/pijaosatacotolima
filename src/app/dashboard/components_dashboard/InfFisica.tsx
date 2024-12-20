@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState } from 'react';
 
 interface InfFisicaProps {
   infrFisica: {
@@ -57,6 +58,7 @@ const InfFisica: React.FC<InfFisicaProps> = ({ infrFisica }) => {
 
       const data = await response.json();
       setDetalle(data);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       setError('No se pudo obtener los detalles de la infraestructura');
     } finally {

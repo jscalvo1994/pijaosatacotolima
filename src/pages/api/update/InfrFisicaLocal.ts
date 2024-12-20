@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // api/update/InfFisicaLocal.ts
 export const config = {
   runtime: 'edge',

@@ -25,8 +25,9 @@ const handler = async (req: Request) => {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ error: 'error desconocido' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });

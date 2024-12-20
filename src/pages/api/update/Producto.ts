@@ -5,7 +5,7 @@ export const config = {
 const handler = async (req: Request) => {
   try {
     const { id_producto } = await req.json();
-    
+
     const response = await fetch(
       'https://dfwh-5ca5356b291e.herokuapp.com/receive/producto_xid',
       {
@@ -25,8 +25,9 @@ const handler = async (req: Request) => {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ error: 'error desconocido' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
