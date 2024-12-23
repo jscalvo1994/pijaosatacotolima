@@ -12,7 +12,7 @@ export default async function handler(
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Método no permitido. Use POST.' });
   }
-
+  console.log('body recive', req.body);
   try {
     const {
       id_emprendimiento,
@@ -28,7 +28,6 @@ export default async function handler(
     } = req.body;
 
     // Log del objeto recibido desde el frontend
-
     // Validación básica de los datos
     if (
       !id_emprendimiento ||
@@ -46,7 +45,7 @@ export default async function handler(
         .status(400)
         .json({ error: 'Todos los campos son obligatorios.' });
     }
-
+    console.log('body recive', req.body);
     // Construcción del payload
     const payload = {
       id_emprendimiento: parseInt(id_emprendimiento, 10),
@@ -68,7 +67,7 @@ export default async function handler(
     };
 
     // Log del objeto transformado para el backend
-
+    console.log('payload', payload);
     // Enviar datos al endpoint externo
     const response = await axios.post(endpoint, payload);
 

@@ -145,7 +145,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       )}
 
       {/* Botón para crear un nuevo emprendimiento */}
-      {n_emprendimientos < 4 && !showInsertForm && (
+      {n_emprendimientos < 3 && !showInsertForm && (
         <button
           onClick={handleShowInsertForm}
           className="mt-4 px-4 py-2 bg-green-500 text-white rounded"

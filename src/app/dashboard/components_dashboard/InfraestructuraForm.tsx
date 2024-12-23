@@ -67,6 +67,7 @@ const InfraestructuraForm: React.FC<InfraestructuraFormProps> = ({
     );
     fetchOptions('tipo_estado', 'estado');
     fetchOptions('tipo_inf_fisica_serv_pub', 'Tip_servicio');
+    fetchOptions('tipo_infraestructura_fisica_local', 'locales');
   }, []);
 
   const handleInputChange = (
@@ -95,13 +96,15 @@ const InfraestructuraForm: React.FC<InfraestructuraFormProps> = ({
 
     // Ruta para el backend según el tipo
     const endpoint =
-      tipo === 'TERRENO'
-        ? '/api/insert/infr_fisica_terreno'
-        : tipo === 'VEHÍCULO'
-          ? '/api/insert/infr_fisica_vehiculo'
-          : tipo === 'SERVICIO PÚBLICO'
-            ? '/api/insert/infr_fisica_serv_pub'
-            : null;
+      tipo === 'LOCAL'
+        ? '/api/insert/infr_fisica_local'
+        : tipo === 'TERRENO'
+          ? '/api/insert/infr_fisica_terreno'
+          : tipo === 'VEHÍCULO'
+            ? '/api/insert/infr_fisica_vehiculo'
+            : tipo === 'SERVICIO PÚBLICO'
+              ? '/api/insert/infr_fisica_serv_pub'
+              : null;
 
     if (!endpoint) {
       console.error('Tipo de infraestructura no soportado.');
@@ -133,7 +136,7 @@ const InfraestructuraForm: React.FC<InfraestructuraFormProps> = ({
     <form onSubmit={handleSubmit} className="space-y-4">
       <h3 className="text-lg font-semibold">Registrar Infraestructura</h3>
       <div>
-        <label>Seleccione Tipo de Infraestructura:</label>
+        <label>Seleccione Tipo de Infraestructura: {options.nombre}</label>
         <select
           name="id_tipo_infraestructura_fisica"
           className="w-full p-2 border rounded"
@@ -149,11 +152,291 @@ const InfraestructuraForm: React.FC<InfraestructuraFormProps> = ({
         </select>
       </div>
 
+      {/* Campos Dinámicos para Terreno */}
+      {tipo === 'TERRENO' && (
+        <>
+          <div>
+            <label>Ubicación:</label>
+            <input
+              type="text"
+              name="ubicacion"
+              className="w-full p-2 border rounded"
+              value={formData.ubicacion}
+              onChange={handleInputChange}
+              placeholder="Ingrese la ubicación"
+            />
+          </div>
+          <div>
+            <label>Dimensiones:</label>
+            <input
+              type="text"
+              name="dimensiones"
+              className="w-full p-2 border rounded"
+              value={formData.dimensiones}
+              onChange={handleInputChange}
+              placeholder="Ingrese las dimensiones"
+            />
+          </div>
+          <div>
+            <label>Uso del Terreno:</label>
+            <select
+              name="id_infraestructura_fisica_uso_terreno"
+              className="w-full p-2 border rounded"
+              value={formData.id_infraestructura_fisica_uso_terreno}
+              onChange={handleInputChange}
+            >
+              <option value="">Seleccione</option>
+              {options.usoTerreno.map((option: any) => (
+                <option key={option.id} value={option.id}>
+                  {option.nombre}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label>Pertenencia:</label>
+            <select
+              name="id_tipo_pertenencia"
+              className="w-full p-2 border rounded"
+              value={formData.id_tipo_pertenencia}
+              onChange={handleInputChange}
+            >
+              <option value="">Seleccione</option>
+              {options.pertenencia.map((option: any) => (
+                <option key={option.id} value={option.id}>
+                  {option.nombre}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label>Clima:</label>
+            <select
+              name="id_tipo_clima"
+              className="w-full p-2 border rounded"
+              value={formData.id_tipo_clima}
+              onChange={handleInputChange}
+            >
+              <option value="">Seleccione</option>
+              {options.clima.map((option: any) => (
+                <option key={option.id} value={option.id}>
+                  {option.nombre}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label>Descripción:</label>
+            <textarea
+              name="descripcion"
+              className="w-full p-2 border rounded"
+              value={formData.descripcion}
+              onChange={handleInputChange}
+              placeholder="Ingrese una descripción"
+            />
+          </div>
+          <div>
+            <label>Costo Inicial:</label>
+            <input
+              type="number"
+              name="costo_inicial"
+              className="w-full p-2 border rounded"
+              value={formData.costo_inicial}
+              onChange={handleInputChange}
+              placeholder="Ingrese el costo inicial"
+            />
+          </div>
+          <div>
+            <label>Costo Mensual:</label>
+            <input
+              type="number"
+              name="costo_mensual"
+              className="w-full p-2 border rounded"
+              value={formData.costo_mensual}
+              onChange={handleInputChange}
+              placeholder="Ingrese el costo mensual"
+            />
+          </div>
+        </>
+      )}
+
+      {/* Campos Dinámicos para Local */}
+      {tipo === 'LOCAL' && (
+        <>
+          <div>
+            <label>Ubicación:</label>
+            <input
+              type="text"
+              name="ubicacion"
+              className="w-full p-2 border rounded"
+              value={formData.ubicacion}
+              onChange={handleInputChange}
+              placeholder="Ingrese la ubicación"
+            />
+          </div>
+          <div>
+            <label>Dimensiones:</label>
+            <input
+              type="text"
+              name="dimensiones"
+              className="w-full p-2 border rounded"
+              value={formData.dimensiones}
+              onChange={handleInputChange}
+              placeholder="Ingrese las dimensiones"
+            />
+          </div>
+          <div>
+            <label>Tipo de Local:</label>
+            <select
+              name="id_tipo_infraestructura_fisica_local"
+              className="w-full p-2 border rounded"
+              value={formData.id_tipo_infraestructura_fisica_local}
+              onChange={handleInputChange}
+            >
+              <option value="">Seleccione</option>
+              {options.locales.map((option: any) => (
+                <option key={option.id} value={option.id}>
+                  {option.nombre}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label>Pertenencia:</label>
+            <select
+              name="id_tipo_pertenencia"
+              className="w-full p-2 border rounded"
+              value={formData.id_tipo_pertenencia}
+              onChange={handleInputChange}
+            >
+              <option value="">Seleccione</option>
+              {options.pertenencia.map((option: any) => (
+                <option key={option.id} value={option.id}>
+                  {option.nombre}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label>Descripción:</label>
+            <textarea
+              name="descripcion"
+              className="w-full p-2 border rounded"
+              value={formData.descripcion}
+              onChange={handleInputChange}
+              placeholder="Describa el local"
+            />
+          </div>
+          <div>
+            <label>Costo Inicial:</label>
+            <input
+              type="number"
+              name="costo_inicial"
+              className="w-full p-2 border rounded"
+              value={formData.costo_inicial}
+              onChange={handleInputChange}
+              placeholder="Ingrese el costo inicial"
+            />
+          </div>
+          <div>
+            <label>Costo Mensual:</label>
+            <input
+              type="number"
+              name="costo_mensual"
+              className="w-full p-2 border rounded"
+              value={formData.costo_mensual}
+              onChange={handleInputChange}
+              placeholder="Ingrese el costo mensual"
+            />
+          </div>
+        </>
+      )}
+
+      {/* Campos Dinámicos para Vehículos */}
+      {tipo === 'VEHÍCULO' && (
+        <>
+          <div>
+            <label>Descripción:</label>
+            <textarea
+              name="descripcion"
+              className="w-full p-2 border rounded"
+              value={formData.descripcion}
+              onChange={handleInputChange}
+              placeholder="Describa el vehículo"
+            />
+          </div>
+          <div>
+            <label>Vehículo:</label>
+            <select
+              name="id_tipo_infraestructura_fisica_vehiculo"
+              className="w-full p-2 border rounded"
+              value={formData.id_tipo_infraestructura_fisica_vehiculo}
+              onChange={handleInputChange}
+            >
+              <option value="">Seleccione</option>
+              {options.vehiculos.map((option: any) => (
+                <option key={option.id} value={option.id}>
+                  {option.nombre}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label>Pertenencia:</label>
+            <select
+              name="id_tipo_pertenencia"
+              className="w-full p-2 border rounded"
+              value={formData.id_tipo_pertenencia}
+              onChange={handleInputChange}
+            >
+              <option value="">Seleccione</option>
+              {options.pertenencia.map((option: any) => (
+                <option key={option.id} value={option.id}>
+                  {option.nombre}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label>Costo Inicial:</label>
+            <input
+              type="number"
+              name="costo_inicial"
+              className="w-full p-2 border rounded"
+              value={formData.costo_inicial}
+              onChange={handleInputChange}
+              placeholder="Ingrese el costo inicial"
+            />
+          </div>
+          <div>
+            <label>Costo Mensual:</label>
+            <input
+              type="number"
+              name="costo_mensual"
+              className="w-full p-2 border rounded"
+              value={formData.costo_mensual}
+              onChange={handleInputChange}
+              placeholder="Ingrese el costo mensual"
+            />
+          </div>
+          <div>
+            <label>Cantidad:</label>
+            <input
+              type="number"
+              name="cantidad"
+              className="w-full p-2 border rounded"
+              value={formData.cantidad}
+              onChange={handleInputChange}
+              placeholder="Ingrese la cantidad"
+            />
+          </div>
+        </>
+      )}
       {/* Campos Dinámicos para Servicios Públicos */}
       {tipo === 'SERVICIO PÚBLICO' && (
         <>
           <div>
-            <label>Tipo de Servicio:</label>
+            <label>Tipo Infraestructura Servicio Publico:</label>
             <select
               name="id_tipo_infraestructura_fisica_servicio_publico"
               className="w-full p-2 border rounded"
