@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   try {
     const response = await axios.get(
-      'https://dfwh-5ca5356b291e.herokuapp.com/send/tipo_unidad_medida',
+      'https://dfwh-5ca5356b291e.herokuapp.com/send/tipo_material',
     );
     res.status(200).json(response.data);
   } catch (error) {

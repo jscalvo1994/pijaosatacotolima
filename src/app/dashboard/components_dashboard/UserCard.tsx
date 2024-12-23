@@ -34,7 +34,6 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
     minoria: emprendedor.minoria || '',
     nivel_educativo: emprendedor.nivel_educativo || '',
   };
-
   return (
     <div className="bg-white shadow-md rounded-lg p-6">
       <h2 className="text-xl font-semibold mb-4">Información del Usuario</h2>

@@ -4,6 +4,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import ProjectDetails from './ProjectDetails';
+import InsertData from './InsertData'; // Importar el formulario
 
 interface ProjectCardProps {
   emprendimientos: {
@@ -11,6 +12,7 @@ interface ProjectCardProps {
     nombre: string;
   }[];
   n_emprendimientos: number;
+  idGoogle: string; // ID del usuario que se enviará al formulario
 }
 
 interface Metadata {
@@ -36,7 +38,7 @@ interface Metadata {
       tipo: string;
     }[];
   }[];
-  'infr. tecnologica': {
+  'infraestructura tecnologica': {
     id: number;
     'infr.': string;
   }[];
@@ -53,17 +55,19 @@ interface Metadata {
 const ProjectCard: React.FC<ProjectCardProps> = ({
   emprendimientos,
   n_emprendimientos,
+  idGoogle,
 }) => {
   const [selectedProject, setSelectedProject] = useState<any | null>(null); // Datos del proyecto seleccionado
   const [metadata, setMetadata] = useState<Metadata>({
     empleados: [],
     'infr. fisica': [],
-    'infr. tecnologica': [],
+    'infraestructura tecnologica': [],
     maquinaria: [],
     productos: [],
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showInsertForm, setShowInsertForm] = useState(false); // Estado para mostrar el formulario
 
   const handleViewDetails = async (id: number) => {
     setLoading(true);
@@ -73,11 +77,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         id_emprendimiento: id,
       });
 
-      setSelectedProject(response.data.emprendimiento[0]);
+      setSelectedProject({ ...response.data.emprendimiento[0], id });
       setMetadata({
         empleados: response.data.empleados || [],
         'infr. fisica': response.data['infr. fisica'] || [],
-        'infr. tecnologica': response.data['infr. tecnologica'] || [],
+        'infraestructura tecnologica':
+          response.data['infraestructura tecnologica'] || [],
         maquinaria: response.data.maquinaria || [],
         productos: response.data.productos || [],
       });
@@ -94,12 +99,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     setMetadata({
       empleados: [],
       'infr. fisica': [],
-      'infr. tecnologica': [],
+      'infraestructura tecnologica': [],
       maquinaria: [],
       productos: [],
     });
   };
 
+  const handleShowInsertForm = () => {
+    setShowInsertForm(true);
+  };
+
+  const handleCloseInsertForm = () => {
+    setShowInsertForm(false);
+  };
+
+  const handleInsertSuccess = () => {
+    setShowInsertForm(false);
+    alert('Emprendimiento creado exitosamente.');
+    // Aquí podrías recargar la lista de emprendimientos o actualizar el estado
+  };
   return (
     <div className="bg-white shadow-md rounded-lg p-6">
       <h2 className="text-xl font-semibold mb-4">Listado de Emprendimientos</h2>
@@ -127,11 +145,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       )}
 
       {/* Botón para crear un nuevo emprendimiento */}
-      {n_emprendimientos < 3 && (
+      {n_emprendimientos < 4 && !showInsertForm && (
         <button
-          onClick={() =>
-            alert('Aquí iría la lógica para crear un nuevo proyecto')
-          }
+          onClick={handleShowInsertForm}
           className="mt-4 px-4 py-2 bg-green-500 text-white rounded"
         >
           Crear Nuevo Emprendimiento
@@ -145,6 +161,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           metadata={metadata}
           onClose={handleCloseDetails}
           onUpdate={() => alert('Lógica para actualizar proyecto')}
+        />
+      )}
+
+      {/* Formulario para insertar un nuevo emprendimiento */}
+      {showInsertForm && (
+        <InsertData
+          idGoogle={idGoogle}
+          onCancel={handleCloseInsertForm}
+          onSubmitSuccess={handleInsertSuccess}
         />
       )}
 

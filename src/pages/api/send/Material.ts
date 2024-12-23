@@ -5,19 +5,23 @@ export const config = {
 
 const handler = async (req: Request) => {
   try {
-    // Leer el cuerpo de la solicitud una sola vez
+    // Leer el cuerpo de la solicitud
     const body = await req.json();
-    const { id_maquinaria } = body;
-    if (!id_maquinaria) {
-      throw new Error('ID de maquinaria no proporcionado');
+    const { id_material } = body;
+
+    if (!id_material) {
+      throw new Error('ID de material no proporcionado');
     }
+
+    console.log('Procesando material ID:', id_material);
+
     // Realizar la solicitud al endpoint externo
     const response = await fetch(
-      'https://dfwh-5ca5356b291e.herokuapp.com/receive/maquinaria_xid',
+      'https://dfwh-5ca5356b291e.herokuapp.com/receive/material_xid',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id_maquinaria }),
+        body: JSON.stringify({ id_material }),
       },
     );
 
@@ -26,6 +30,8 @@ const handler = async (req: Request) => {
     }
 
     const data = await response.json();
+
+    console.log('Datos obtenidos del material:', data);
 
     // Devolver los datos procesados
     return new Response(JSON.stringify(data), {

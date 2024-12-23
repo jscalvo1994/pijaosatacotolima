@@ -5,21 +5,15 @@ export const config = {
 };
 
 const handler = async (req: Request) => {
-  console.log('archivo InfFisicaLocal.ts llamado');
-
   try {
     const body = await req.json();
-    console.log('Cuerpo recibido:', body);
 
     // Extraer el ID y el tipo del cuerpo
     const { id, tipo } = body;
-    console.log('ID:', id, 'Tipo:', tipo);
 
     if (!id || !tipo) {
       throw new Error('ID o tipo no proporcionado en la solicitud');
     }
-
-    console.log('Procesando ID:', id, 'para tipo:', tipo);
 
     // Seleccionar el endpoint y el cuerpo de la solicitud basado en el tipo
     let endpoint = '';
@@ -54,8 +48,6 @@ const handler = async (req: Request) => {
         throw new Error(`Tipo no reconocido: ${tipo}`);
     }
 
-    console.log('Realizando consulta al endpoint:', endpoint);
-
     // Realizar la consulta al endpoint seleccionado
     const response = await fetch(endpoint, {
       method: 'POST',
@@ -70,7 +62,6 @@ const handler = async (req: Request) => {
     }
 
     const data = await response.json();
-    console.log('Datos obtenidos:', data);
 
     // Formatear los datos en el backend: excluir "id" y preparar para el frontend
     const formattedData = Object.entries(data[0])

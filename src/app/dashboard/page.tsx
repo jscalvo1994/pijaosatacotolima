@@ -59,6 +59,7 @@ export default function DashboardPage() {
       <ProjectCard
         emprendimientos={emprendimientos || []}
         n_emprendimientos={n_emprendimientos || 0}
+        idGoogle={id}
       />
     </div>
   );

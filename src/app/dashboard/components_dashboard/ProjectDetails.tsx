@@ -16,13 +16,14 @@ interface Metadata {
     vehículos?: { id: number; tipo: string }[];
     'servicios publicos'?: { id: number; tipo: string }[];
   }[];
-  'infr. tecnologica': { id: number; 'infr.': string }[];
+  'infraestructura tecnologica': { id: number; 'infr.': string }[]; // Nombre corregido
   maquinaria: { id: number; maquinaria: string }[];
   productos: { id: number; producto: string }[];
 }
 
 interface ProjectDetailsProps {
   project: {
+    id: number;
     nombre: string;
     direccion: string;
     ciudad: string;
@@ -41,15 +42,12 @@ interface ProjectDetailsProps {
   onClose: () => void;
   onUpdate: () => void;
 }
-
 const ProjectDetails: React.FC<ProjectDetailsProps> = ({
   project,
   metadata,
   onClose,
-  onUpdate,
 }) => {
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
-
   const handleViewDetails = (key: string) => {
     // Si el mismo botón es presionado, cierra el componente
     setSelectedKey((prevKey) => (prevKey === key ? null : key));
@@ -58,22 +56,44 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
   const renderComponent = (key: string) => {
     switch (key) {
       case 'empleados':
-        return <Empleados empleados={metadata.empleados} />;
-      case 'infr. fisica':
-        return <InfFisica infrFisica={metadata['infr. fisica']} />;
-      case 'infr. tecnologica':
         return (
-          <InfTecnologica infrTecnologica={metadata['infr. tecnologica']} />
+          <Empleados
+            empleados={metadata.empleados}
+            id_emprendimiento={project.id} // Pasar el ID del emprendimiento
+          />
+        );
+      case 'infr. fisica':
+        return (
+          <InfFisica
+            infrFisica={metadata['infr. fisica']}
+            id_emprendimiento={project.id} // Pasar el ID del emprendimiento
+          />
+        );
+      case 'infraestructura tecnologica': // Nombre corregido
+        return (
+          <InfTecnologica
+            infrTecnologica={metadata['infraestructura tecnologica']}
+            id_emprendimiento={project.id} // Pasar el ID del emprendimiento
+          />
         );
       case 'maquinaria':
-        return <Maquinas maquinas={metadata.maquinaria} />;
+        return (
+          <Maquinas
+            maquinas={metadata.maquinaria}
+            id_emprendimiento={project.id} // Pasar el ID del emprendimiento
+          />
+        );
       case 'productos':
-        return <Productos productos={metadata.productos} />;
+        return (
+          <Productos
+            productos={metadata.productos}
+            id_emprendimiento={project.id} // Pasar el ID del emprendimiento
+          />
+        );
       default:
         return null;
     }
   };
-
   return (
     <div className="bg-white shadow-md rounded-lg p-6">
       <h2 className="text-xl font-semibold mb-4">Detalles del Proyecto</h2>
@@ -93,33 +113,22 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
           <strong>Departamento:</strong> {project.departamento}
         </p>
       </div>
-
       {/* Botones y lógica de apertura de componentes */}
       <div className="space-y-4">
-        {Object.entries(metadata).map(([key, value]) => (
+        {Object.entries(metadata).map(([key]) => (
           <div key={key} className="flex justify-between items-center">
             <span>{key}</span>
-            {Array.isArray(value) && value.length > 0 ? (
-              <button
-                onClick={() => handleViewDetails(key)}
-                className={`px-4 py-2 rounded ${
-                  selectedKey === key ? 'bg-red-500' : 'bg-blue-500'
-                } text-white`}
-              >
-                {selectedKey === key ? 'Cerrar' : 'Ver Detalles'}
-              </button>
-            ) : (
-              <button
-                onClick={onUpdate}
-                className="px-4 py-2 bg-green-500 text-white rounded"
-              >
-                Actualizar
-              </button>
-            )}
+            <button
+              onClick={() => handleViewDetails(key)}
+              className={`px-4 py-2 rounded ${
+                selectedKey === key ? 'bg-red-500' : 'bg-blue-500'
+              } text-white`}
+            >
+              {selectedKey === key ? 'Cerrar' : 'Ver Detalles'}
+            </button>
           </div>
         ))}
       </div>
-
       {/* Renderizado Condicional del Componente Seleccionado */}
       <div className="mt-4">{selectedKey && renderComponent(selectedKey)}</div>
 

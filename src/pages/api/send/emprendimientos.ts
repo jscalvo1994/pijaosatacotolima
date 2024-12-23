@@ -16,9 +16,6 @@ export default async function handler(
       .status(400)
       .json({ error: 'El campo id_emprendimiento es obligatorio' });
   }
-
-  console.log('ID de emprendimiento enviado:', id_emprendimiento);
-
   try {
     // Enviar el ID al backend con el formato correcto
     const response = await axios.post(
@@ -30,8 +27,6 @@ export default async function handler(
         },
       },
     );
-
-    console.log('Respuesta del backend:', response.data);
     return res.status(200).json(response.data); // Devuelve la respuesta del backend al frontend
   } catch (err: any) {
     console.error('Error al obtener los datos del emprendimiento:', err);

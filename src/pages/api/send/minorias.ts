@@ -9,7 +9,7 @@ export default async function handler(
     const response = await axios.get(
       'https://dfwh-5ca5356b291e.herokuapp.com/send/tipo_minoria',
     );
-    console.log('tipo_minoria', response.data);
+
     res.status(200).json(response.data);
   } catch (error) {
     console.error('Error al obtener minoria:', error);

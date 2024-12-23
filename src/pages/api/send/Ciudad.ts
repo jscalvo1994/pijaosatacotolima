@@ -6,17 +6,17 @@ export const config = {
 const handler = async (req: Request) => {
   try {
     // Obtener el ID del empleado desde los parámetros de la solicitud
-    const { id_empleado } = await req.json();
-    console.log('EmpleadoData', id_empleado);
+    const { id_departamento } = await req.json();
+    console.log('Ciudad', id_departamento);
     // Realizar la solicitud POST al endpoint externo con el ID del empleado
     const response = await fetch(
-      `https://dfwh-5ca5356b291e.herokuapp.com/receive/empleado_xid`,
+      `https://dfwh-5ca5356b291e.herokuapp.com/receive/ciudad_xid`,
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id_empleado }),
+        body: JSON.stringify({ id_departamento }),
       },
     );
 

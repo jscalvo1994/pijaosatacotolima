@@ -7,11 +7,11 @@ export default async function handler(
 ) {
   try {
     const response = await axios.get(
-      'https://dfwh-5ca5356b291e.herokuapp.com/send/tipo_unidad_medida',
+      'https://dfwh-5ca5356b291e.herokuapp.com/send/tipo_meta_corto_plazo',
     );
     res.status(200).json(response.data);
   } catch (error) {
-    console.error('Error al obtener unidad_medida:', error);
-    res.status(500).json({ error: 'Error al obtener unidad_medida' });
+    console.error('Error al obtener departamento:', error);
+    res.status(500).json({ error: 'Error al obtener departamento' });
   }
 }
