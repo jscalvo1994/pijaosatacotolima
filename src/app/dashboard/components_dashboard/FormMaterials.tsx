@@ -9,7 +9,6 @@ interface FormMaterialsProps {
 }
 
 const FormMaterials: React.FC<FormMaterialsProps> = ({
-  id_emprendimiento,
   productos,
   onClose,
   onSuccess,
