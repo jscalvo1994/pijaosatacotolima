@@ -43,12 +43,12 @@ export default function DashboardPage() {
       {/* Tarjeta de Usuario */}
       <UserCard
         user={{
-          id,
-          name,
-          email,
-          image,
-          emprendedor: emprendedor || [],
-          emprendimiento: emprendimientos || [],
+          id: id || '', // Garantiza que sea una cadena
+          name: name || 'Usuario Anónimo', // Nombre predeterminado
+          email: email || 'Sin correo', // Correo predeterminado
+          image: image || '', // Imagen predeterminada (vacío)
+          emprendedor: emprendedor || [], // Lista predeterminada vacía
+          emprendimiento: emprendimientos || [], // Lista predeterminada vacía
         }}
         onUpdate={(updatedData) => {
           console.log('Datos actualizados del usuario:', updatedData);

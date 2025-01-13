@@ -1,25 +1,25 @@
 'use client';
 
+import { useEffect } from 'react';
 import { signIn } from 'next-auth/react';
 
 export default function LoginPage() {
-  const handleLogin = async () => {
-    try {
-      console.log('Intentando iniciar sesión con Google...');
-      await signIn('google', { callbackUrl: '/dashboard' }); // Redirige al Dashboard
-    } catch (error) {
-      console.error('Error al iniciar sesión:', error);
-    }
-  };
+  useEffect(() => {
+    const initiateLogin = async () => {
+      try {
+        console.log('Redirigiendo a inicio de sesión con Google...');
+        await signIn('google', { callbackUrl: '/dashboard' });
+      } catch (error) {
+        console.error('Error al intentar iniciar sesión:', error);
+      }
+    };
+
+    initiateLogin();
+  }, []); // Se ejecuta solo una vez al montar el componente
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <button
-        className="px-4 py-2 bg-blue-500 text-white rounded"
-        onClick={handleLogin}
-      >
-        Iniciar sesión con Google
-      </button>
+      <p className="text-lg">Redirigiendo al inicio de sesión...</p>
     </div>
   );
 }

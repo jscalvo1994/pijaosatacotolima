@@ -118,6 +118,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     alert('Emprendimiento creado exitosamente.');
     // Aquí podrías recargar la lista de emprendimientos o actualizar el estado
   };
+  console.log('listado de emprendimientos', emprendimientos);
   return (
     <div className="bg-white shadow-md rounded-lg p-6">
       <h2 className="text-xl font-semibold mb-4">Listado de Emprendimientos</h2>

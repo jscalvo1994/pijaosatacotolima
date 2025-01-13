@@ -231,6 +231,15 @@ const nextConfig: NextConfig = {
         destination:
           'https://dfwh-5ca5356b291e.herokuapp.com/receive/material_xid',
       },
+      {
+        source: '/api/auth/emprendedor',
+        destination:
+          'https://dfwh-5ca5356b291e.herokuapp.com/receive/emprendedor',
+      },
+      {
+        source: '/api/auth/emprendedor',
+        destination: 'https://dfwh-5ca5356b291e.herokuapp.com/receive/auth',
+      },
     ];
   },
 };
