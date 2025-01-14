@@ -54,6 +54,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, onUpdate }) => {
         nombre: emprendedor.nombre,
         telefono: emprendedor.telefono,
         documento: emprendedor.documento,
+        email: user.email,
         minoria: emprendedor.minoria,
         departamento_nacimiento: emprendedor.departamento_nacimiento,
         ciudad_nacimiento: emprendedor.ciudad_nacimiento,
@@ -61,11 +62,12 @@ const UserCard: React.FC<UserCardProps> = ({ user, onUpdate }) => {
         ciudad_residencia: emprendedor.ciudad_residencia,
         nivel_educativo: emprendedor.nivel_educativo,
         sexo: emprendedor.sexo,
-        id_google: emprendedor.id_google, // Mantener oculto
+        id_google: user.id, // Mantener oculto
       });
     }
   }, [user]);
-
+  console.log('email', user.email);
+  console.log('id google', user.id);
   // Obtener datos de las listas dinámicas
   useEffect(() => {
     const fetchData = async () => {
@@ -159,6 +161,8 @@ const UserCard: React.FC<UserCardProps> = ({ user, onUpdate }) => {
       const payload = {
         ...formData,
         fecha_nacimiento: formattedDate,
+        email: user.email,
+        id_google: user.id,
       };
 
       console.log('Enviando datos al backend:', payload);
@@ -402,14 +406,6 @@ const UserCard: React.FC<UserCardProps> = ({ user, onUpdate }) => {
                   </option>
                 ))}
               </select>
-            </div>
-            <div>
-              <input
-                type="hidden"
-                name="id"
-                value={formData.id_google}
-                className="w-full border rounded px-3 py-2"
-              />
             </div>
             <div>
               <label className="block mb-1 font-semibold">Sexo</label>

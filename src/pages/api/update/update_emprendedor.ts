@@ -36,7 +36,7 @@ export default async function handler(
     console.log('Datos reestructurados para el backend:', payload);
 
     // Enviar los datos al endpoint externo
-    const response = await axios.post(
+    /*     const response = await axios.post(
       'https://dfwh-5ca5356b291e.herokuapp.com/receive/emprendedor',
       payload, // JSON reestructurado
       {
@@ -44,10 +44,10 @@ export default async function handler(
           'Content-Type': 'application/json',
         },
       },
-    );
+    ); */
 
-    // Retornar la respuesta al cliente
-    return res.status(200).json(response.data);
+    // Retornar la respuesta al cliente .json(response.data)
+    return res.status(200);
   } catch (error) {
     console.error('Error al enviar datos al backend:', error);
 
