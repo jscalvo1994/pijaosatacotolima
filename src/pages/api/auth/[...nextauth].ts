@@ -86,5 +86,6 @@ export default NextAuth({
   secret: process.env.NEXTAUTH_SECRET, // Asegúrate de definir esto en tu entorno
   pages: {
     signIn: '/login', // Página personalizada de inicio de sesión
+    signOut: 'localhost:3000', // Página personalizada de cierre de sesión
   },
 });

@@ -48,7 +48,12 @@ const NavbarContent: React.FC = () => {
             </Link>
           )}
           {session ? (
-            <button onClick={() => signOut()} className="hover:text-red-500">
+            <button
+              onClick={async () => {
+                await signOut({ redirect: true, callbackUrl: '/' });
+              }}
+              className="hover:text-red-500"
+            >
               LogOut
             </button>
           ) : (
