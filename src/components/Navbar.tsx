@@ -7,13 +7,11 @@ import { useSession, signOut } from 'next-auth/react';
 import { SessionProvider } from 'next-auth/react';
 
 const NavbarContent: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { data: session } = useSession();
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const closeMenu = () => {
-    setIsMenuOpen(false);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
@@ -21,7 +19,7 @@ const NavbarContent: React.FC = () => {
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <div className="text-2xl font-bold flex items-center">
-          <Link href="/" className="hover:text-green-300">
+          <Link href="/">
             <Image
               src="/Logoimg/logo-img-public.jpg"
               alt="logo"
@@ -31,7 +29,15 @@ const NavbarContent: React.FC = () => {
           </Link>
         </div>
 
-        {/* Desktop Menu */}
+        {/* Botón de menú hamburguesa (solo en móviles) */}
+        <button
+          className="md:hidden text-3xl focus:outline-none"
+          onClick={toggleMenu}
+        >
+          ☰
+        </button>
+
+        {/* Menú Desktop */}
         <div className="hidden md:flex space-x-6">
           <Link href="/" className="hover:text-black-300">
             Home
@@ -63,6 +69,63 @@ const NavbarContent: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* Menú Móvil */}
+      {isMenuOpen && (
+        <div className="md:hidden absolute top-14 left-0 w-full bg-white border-t border-black shadow-md">
+          <div className="flex flex-col items-center py-4 space-y-4">
+            <Link
+              href="/"
+              onClick={toggleMenu}
+              className="hover:text-black-300"
+            >
+              Home
+            </Link>
+            <Link
+              href="/about"
+              onClick={toggleMenu}
+              className="hover:text-green-300"
+            >
+              Quiénes Somos
+            </Link>
+            <Link
+              href="/communities"
+              onClick={toggleMenu}
+              className="hover:text-green-300"
+            >
+              Nuestras Comunidades
+            </Link>
+            {session && (
+              <Link
+                href="/dashboard"
+                onClick={toggleMenu}
+                className="hover:text-green-300"
+              >
+                Panel administrador
+              </Link>
+            )}
+            {session ? (
+              <button
+                onClick={async () => {
+                  await signOut({ redirect: true, callbackUrl: '/' });
+                  toggleMenu();
+                }}
+                className="hover:text-red-500"
+              >
+                LogOut
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                onClick={toggleMenu}
+                className="hover:text-green-300"
+              >
+                Login
+              </Link>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
