@@ -18,7 +18,7 @@ const UserCard: React.FC<{ user: any; onUpdate: (data: any) => void }> = ({
     loading,
     error,
   } = useFetchUserData();
-
+  console.log('user in UserCard', user.id, user.email);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [formData, setFormData] = useState<any>({});
   const [ciudadesResidencia, setCiudadesResidencia] = useState<any[]>([]);
@@ -139,12 +139,14 @@ const UserCard: React.FC<{ user: any; onUpdate: (data: any) => void }> = ({
           onCancel={() => setShowUpdateForm(false)}
           departamentosNacimiento={departamentosNacimiento}
           ciudadesNacimiento={ciudadesNacimiento} // Pasamos las ciudades de nacimiento dinámicas
+          email={user.email} // ✅ Pasamos el email
+          idGoogle={user.id} // ✅ Pasamos el id de Google
           handleDepartamentoNacimientoChange={
             handleDepartamentoNacimientoChange
           } // ✅ Ahora implementado correctamente
         />
       ) : (
-        <UserInfo formData={formData} onEdit={() => setShowUpdateForm(true)} />
+        <UserInfo userId={user.id} formData={formData} onEdit={() => setShowUpdateForm(true)} />
       )}
     </div>
   );

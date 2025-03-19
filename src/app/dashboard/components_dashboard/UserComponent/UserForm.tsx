@@ -16,6 +16,8 @@ interface UserFormProps {
   handleDepartamentoNacimientoChange: (
     e: React.ChangeEvent<HTMLSelectElement>,
   ) => void;
+  email: string; // Add email property
+  idGoogle: string; // Add idGoogle property
   handleSubmit: () => void;
   onCancel: () => void;
 }
@@ -31,6 +33,8 @@ const UserForm: React.FC<UserFormProps> = ({
   ciudades,
   departamentosNacimiento,
   ciudadesNacimiento,
+  idGoogle,
+  email,
   handleDepartamentoChange,
   handleDepartamentoNacimientoChange,
   handleSubmit,
@@ -69,10 +73,19 @@ const UserForm: React.FC<UserFormProps> = ({
     setIsFormValid(valid);
   };
 
+  // 1️⃣ UseEffect para actualizar `formData` con `email` e `id_google`
+  useEffect(() => {
+    setFormData((prev: any) => ({
+      ...prev,
+      email: prev.email || email, // Si prev.email está vacío, usa el de las props
+      id_google: prev.id_google || idGoogle, // Si prev.id_google está vacío, usa el de las props
+    }));
+  }, [email, idGoogle]); // Solo se ejecuta cuando `email` o `idGoogle` cambian
+
+  // 2️⃣ UseEffect para validar el formulario cada vez que `formData` o `errors` cambien
   useEffect(() => {
     validateForm();
-  }, [formData, errors]);
-
+  }, [formData, errors]); // Mantiene la validación sin errores
   // Manejo de cambios en inputs
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -112,8 +125,31 @@ const UserForm: React.FC<UserFormProps> = ({
     setErrors((prev) => ({ ...prev, [name]: errorMsg }));
     setFormData((prev: any) => ({ ...prev, [name]: value }));
   };
+
+  console.log('idGoogle', idGoogle);
+  console.log('email', email);
   return (
     <form className="space-y-4">
+      {/*User ID*/}
+      <div>
+        <label className="block mb-1 font-semibold">ID</label>
+        <input
+          type="text"
+          name="idGoogle"
+          value={idGoogle || ''}
+          onChange={handleInputChange}
+        />
+      </div>
+      {/*User Email*/}
+      <div>
+        <label className="block mb-1 font-semibold">email</label>
+        <input
+          type="email"
+          name="email"
+          value={email || ''}
+          onChange={handleInputChange}
+        />
+      </div>
       {/* Nombre */}
       <div>
         <label className="block mb-1 font-semibold">Nombre</label>
