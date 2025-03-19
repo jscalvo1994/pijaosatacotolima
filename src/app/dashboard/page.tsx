@@ -24,16 +24,9 @@ export default function DashboardPage() {
     return null;
   }
 
-  const {
-    id,
-    name,
-    email,
-    image,
-    emprendedor,
-    emprendimientos,
-    n_emprendimientos,
-  } = session.user;
-
+  const { id, name, image, emprendedor, emprendimientos, n_emprendimientos } =
+    session.user;
+  console.log('Datos del usuario email and idgoogle:', session.user);
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">
@@ -43,9 +36,9 @@ export default function DashboardPage() {
       {/* Tarjeta de Usuario */}
       <UserCard
         user={{
-          id: id || '', // Garantiza que sea una cadena
+          id: session.user.id || '', // Garantiza que sea una cadena
           name: name || 'Usuario Anónimo', // Nombre predeterminado
-          email: email || 'Sin correo', // Correo predeterminado
+          email: session.user.email || 'Sin correo', // Correo predeterminado
           image: image || '', // Imagen predeterminada (vacío)
           emprendedor: emprendedor || [], // Lista predeterminada vacía
           emprendimiento: emprendimientos || [], // Lista predeterminada vacía
