@@ -16,8 +16,10 @@ interface UserFormProps {
   handleDepartamentoNacimientoChange: (
     e: React.ChangeEvent<HTMLSelectElement>,
   ) => void;
-  email: string; // Add email property
-  idGoogle: string; // Add idGoogle property
+  email?: string | undefined; // Add email property
+  idGoogle?: string | undefined; // Add idGoogle property
+  emailuser?: string | undefined; // Add this line
+  idGoogleuser?: string | undefined;
   handleSubmit: () => void;
   onCancel: () => void;
 }
