@@ -50,7 +50,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
   onClose,
 }) => {
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
-  const [loadingPDF, setLoadingPDF] = useState(false); // Estado para el botón de PDF
+  const [loadingPDF, setLoadingPDF] = useState(false);
 
   const handleViewDetails = (key: string) => {
     setSelectedKey((prevKey) => (prevKey === key ? null : key));
@@ -98,14 +98,75 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
     }
   };
 
-  // Manejador para generar PDF
+  // Verifica si los datos están completos para permitir generar el PDF
+  const isPDFGenerable = () => {
+    const hasEmpleados = metadata.empleados && metadata.empleados.length > 0;
+
+    const fisica = metadata['infr. fisica']?.[0];
+    const hasTerrenos = (fisica?.terrenos ?? []).length > 0;
+    const hasLocales = (fisica?.locales ?? []).length > 0;
+    const hasInfraFisica = hasTerrenos || hasLocales;
+
+    const hasTecnologica =
+      metadata['infraestructura tecnologica'] &&
+      metadata['infraestructura tecnologica'].length > 0;
+
+    const hasMaquinaria = metadata.maquinaria && metadata.maquinaria.length > 0;
+
+    const hasProductos = metadata.productos && metadata.productos.length > 0;
+
+    return (
+      hasEmpleados &&
+      hasInfraFisica &&
+      hasTecnologica &&
+      hasMaquinaria &&
+      hasProductos
+    );
+  };
+
+  // Genera la lista de mensajes de error si faltan datos
+  const getMissingFields = () => {
+    const messages: string[] = [];
+
+    if (!metadata.empleados || metadata.empleados.length === 0) {
+      messages.push('Debe agregar al menos un empleado.');
+    }
+
+    const fisica = metadata['infr. fisica']?.[0];
+    const hasTerrenos = (fisica?.terrenos ?? []).length > 0;
+    const hasLocales = (fisica?.locales ?? []).length > 0;
+    if (!hasTerrenos && !hasLocales) {
+      messages.push(
+        'Debe registrar al menos un terreno o local en Infraestructura Física.',
+      );
+    }
+
+    if (
+      !metadata['infraestructura tecnologica'] ||
+      metadata['infraestructura tecnologica'].length === 0
+    ) {
+      messages.push(
+        'Debe agregar al menos un elemento de Infraestructura Tecnológica.',
+      );
+    }
+
+    if (!metadata.maquinaria || metadata.maquinaria.length === 0) {
+      messages.push('Debe agregar al menos una máquina.');
+    }
+
+    if (!metadata.productos || metadata.productos.length === 0) {
+      messages.push('Debe agregar al menos un producto.');
+    }
+
+    return messages;
+  };
+
   const handleGeneratePDF = async () => {
     try {
       setLoadingPDF(true);
       const response = await axios.post('/api/insert/PDFgenerate', {
         id_emprendimiento: project.id,
       });
-
       alert(response.data.message);
     } catch (error) {
       console.error('Error al generar el PDF:', error);
@@ -158,19 +219,26 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
       <div className="mt-4">{selectedKey && renderComponent(selectedKey)}</div>
 
       {/* Botones de acción */}
-      <div className="mt-6 flex justify-end space-x-4">
-        {/* Botón para generar PDF */}
+      <div className="mt-6 flex flex-col items-end space-y-2">
         <button
           onClick={handleGeneratePDF}
-          disabled={loadingPDF} // Desactivar mientras se genera el PDF
+          disabled={loadingPDF || !isPDFGenerable()}
           className={`px-4 py-2 rounded ${
-            loadingPDF ? 'bg-gray-400' : 'bg-green-500'
+            loadingPDF || !isPDFGenerable() ? 'bg-gray-400' : 'bg-green-500'
           } text-white`}
         >
           {loadingPDF ? 'Generando...' : 'Generar PDF'}
         </button>
 
-        {/* Botón de cierre */}
+        {/* Mostrar mensajes de advertencia si no se puede generar el PDF */}
+        {!isPDFGenerable() && (
+          <div className="text-sm text-red-600 space-y-1 text-right">
+            {getMissingFields().map((msg, index) => (
+              <p key={index}>• {msg}</p>
+            ))}
+          </div>
+        )}
+
         <button
           onClick={onClose}
           className="px-4 py-2 bg-gray-500 text-white rounded"
@@ -181,4 +249,5 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
     </div>
   );
 };
+
 export default ProjectDetails;
