@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import UserCard from './components_dashboard/UserCard';
 import ProjectCard from './components_dashboard/ProjectCard';
+import Navbar from '../../components/Navbar';
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
@@ -49,11 +50,7 @@ export default function DashboardPage() {
       />
 
       {/* Tarjeta de Proyectos */}
-      <ProjectCard
-        emprendimientos={emprendimientos || []}
-        n_emprendimientos={n_emprendimientos || 0}
-        idGoogle={id}
-      />
+      <ProjectCard idGoogle={id} />
     </div>
   );
 }

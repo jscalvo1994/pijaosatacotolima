@@ -15,7 +15,7 @@ const InsertData: React.FC<InsertDataProps> = ({
   onCancel,
   onSubmitSuccess,
 }) => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{ [key: string]: string }>({
     nombre: '',
     id_google: idGoogle,
     direccion: '',
@@ -42,6 +42,8 @@ const InsertData: React.FC<InsertDataProps> = ({
   const [adminEmprendimiento, setAdminEmprendimiento] = useState<any[]>([]);
   const [empleadoExperiencia, setEmpleadoExperiencia] = useState<any[]>([]);
   const [loadingCiudades, setLoadingCiudades] = useState(false);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [isFormValid, setIsFormValid] = useState(false);
   const fetchOptions = async () => {
     try {
       const [
@@ -79,13 +81,68 @@ const InsertData: React.FC<InsertDataProps> = ({
       console.error('Error al cargar opciones:', error);
     }
   };
-
+  // Inicio del bloque de validación de campos
   useEffect(() => {
     fetchOptions();
   }, []);
 
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    const { name, value } = e.target;
+    let errorMsg = '';
+
+    // Validaciones para selects vacíos
+    if (
+      [
+        'id_departamento',
+        'id_ciudad',
+        'id_tipo_canal_distribucion',
+        'id_tipo_meta_corto_plazo',
+        'id_tipo_capital_inicial',
+        'id_tipo_origen_capital_inicial',
+        'id_tipo_publico_objetivo',
+        'id_tipo_estrategia_precios',
+        'id_tipo_admin_emprendimiento',
+        'id_tipo_empleado_experiencia',
+      ].includes(name) &&
+      (value === '' || value === 'Seleccione')
+    ) {
+      errorMsg = 'Debe seleccionar una opción válida.';
+    }
+
+    // Validación para nombre
+    if (name === 'nombre' && !/^[a-zA-ZÀ-ÿ\s]+$/.test(value)) {
+      errorMsg = 'Solo se permiten letras y espacios.';
+    }
+
+    // Validación para utilidad_neta
+    if (name === 'utilidad_neta' && !/^\d*\.?\d*$/.test(value)) {
+      errorMsg = 'Ingrese solo números o decimales.';
+    }
+
+    // Validación para dirección
+    if (name === 'direccion' && value.trim().length < 3) {
+      errorMsg = 'La dirección debe tener al menos 3 caracteres.';
+    }
+
+    // Si cambia el departamento, cargamos ciudades
+    if (name === 'id_departamento') {
+      handleDepartamentoChange(value);
+    }
+
+    // Guardar errores y actualizar formData
+    setErrors((prev) => ({ ...prev, [name]: errorMsg }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Carga las ciudades al seleccionar un departamento
   const handleDepartamentoChange = async (value: string) => {
-    setFormData({ ...formData, id_departamento: value, id_ciudad: '' });
+    setFormData((prev) => ({
+      ...prev,
+      id_departamento: value,
+      id_ciudad: '',
+    }));
     setLoadingCiudades(true);
     try {
       const response = await axios.put('/api/send/Ciudad', {
@@ -99,32 +156,60 @@ const InsertData: React.FC<InsertDataProps> = ({
     }
   };
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
+  // Envío del formulario
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
       const response = await axios.post('/api/insert/emprendimiento', formData);
 
-      if (response.status === 200) {
-        // Llamar la función de éxito proporcionada
-        onSubmitSuccess();
+      if (response.status >= 200 && response.status < 300) {
+        const idEmprendimiento = response.data?.data?.id_emprendimiento; // 👈 Asegúrate que lo recibes
+        if (idEmprendimiento) {
+          // Obtener los datos completos del emprendimiento recién creado
+          const detalles = await axios.post('/api/send/emprendimientos', {
+            id_emprendimiento: idEmprendimiento,
+          });
+
+          console.log('Datos del emprendimiento creado:', detalles.data);
+          // Aquí puedes redirigir, mostrar un modal o actualizar el estado para renderizarlo
+        }
+
+        onSubmitSuccess(); // Si deseas mostrar confirmación
       } else {
-        console.error('Error inesperado:', response.data);
-        alert(
-          'Ocurrió un error al crear el emprendimiento. Por favor, inténtelo de nuevo.',
-        );
+        alert('Error inesperado al crear el emprendimiento');
       }
     } catch (error: any) {
       console.error('Error al crear emprendimiento:', error);
+      alert('No se pudo crear el emprendimiento. Intente de nuevo.');
     }
   };
+
+  // Validación global del formulario
+  useEffect(() => {
+    const requiredFields = [
+      'nombre',
+      'direccion',
+      'id_departamento',
+      'id_ciudad',
+      'id_tipo_canal_distribucion',
+      'id_tipo_meta_corto_plazo',
+      'id_tipo_capital_inicial',
+      'id_tipo_origen_capital_inicial',
+      'id_tipo_publico_objetivo',
+      'id_tipo_estrategia_precios',
+      'id_tipo_admin_emprendimiento',
+      'id_tipo_empleado_experiencia',
+      'utilidad_neta',
+    ];
+
+    const valid = requiredFields.every(
+      (field) => formData[field] && !errors[field],
+    );
+
+    setIsFormValid(valid);
+  }, [formData, errors]);
+  // Fin del bloque de validación de campos
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit}>
@@ -132,38 +217,46 @@ const InsertData: React.FC<InsertDataProps> = ({
 
       {/* Nombre */}
       <div>
-        <label>Nombre:</label>
+        <label>Nombre del emprendimiento:</label>
         <input
           type="text"
           name="nombre"
           value={formData.nombre}
           onChange={handleInputChange}
-          className="w-full p-2 border rounded"
+          className={`w-full p-2 border rounded ${
+            errors.nombre ? 'border-red-500' : ''
+          }`}
           required
         />
+        {errors.nombre && (
+          <p className="text-red-500 text-sm">{errors.nombre}</p>
+        )}
       </div>
 
       {/* Dirección */}
       <div>
-        <label>Dirección:</label>
+        <label>Dirección donde se ubica el emprendimiento:</label>
         <input
           type="text"
           name="direccion"
           value={formData.direccion}
           onChange={handleInputChange}
-          className="w-full p-2 border rounded"
+          className={`w-full p-2 border rounded ${errors.direccion ? 'border-red-500' : ''}`}
           required
         />
+        {errors.direccion && (
+          <p className="text-red-500 text-sm">{errors.direccion}</p>
+        )}
       </div>
 
       {/* Departamento */}
       <div>
-        <label>Departamento:</label>
+        <label>Departamento donde se encuentra el emprendimiento:</label>
         <select
           name="id_departamento"
           value={formData.id_departamento}
-          onChange={(e) => handleDepartamentoChange(e.target.value)}
-          className="w-full p-2 border rounded"
+          onChange={(e) => handleInputChange(e)} // ahora pasamos por handleInputChange
+          className={`w-full p-2 border rounded ${errors.id_departamento ? 'border-red-500' : ''}`}
           required
         >
           <option value="">Seleccione un departamento</option>
@@ -173,16 +266,19 @@ const InsertData: React.FC<InsertDataProps> = ({
             </option>
           ))}
         </select>
+        {errors.id_departamento && (
+          <p className="text-red-500 text-sm">{errors.id_departamento}</p>
+        )}
       </div>
 
       {/* Ciudad */}
       <div>
-        <label>Ciudad:</label>
+        <label>Ciudad donde se encuentra el emprendimiento:</label>
         <select
           name="id_ciudad"
           value={formData.id_ciudad}
           onChange={handleInputChange}
-          className="w-full p-2 border rounded"
+          className={`w-full p-2 border rounded ${errors.id_ciudad ? 'border-red-500' : ''}`}
           required
           disabled={!formData.id_departamento || loadingCiudades}
         >
@@ -193,6 +289,9 @@ const InsertData: React.FC<InsertDataProps> = ({
             </option>
           ))}
         </select>
+        {errors.id_ciudad && (
+          <p className="text-red-500 text-sm">{errors.id_ciudad}</p>
+        )}
       </div>
 
       {/* Canal de Distribución */}
@@ -202,7 +301,7 @@ const InsertData: React.FC<InsertDataProps> = ({
           name="id_tipo_canal_distribucion"
           value={formData.id_tipo_canal_distribucion}
           onChange={handleInputChange}
-          className="w-full p-2 border rounded"
+          className={`w-full p-2 border rounded ${errors.id_tipo_canal_distribucion ? 'border-red-500' : ''}`}
           required
         >
           <option value="">Seleccione un canal de distribución</option>
@@ -212,6 +311,11 @@ const InsertData: React.FC<InsertDataProps> = ({
             </option>
           ))}
         </select>
+        {errors.id_tipo_canal_distribucion && (
+          <p className="text-red-500 text-sm">
+            {errors.id_tipo_canal_distribucion}
+          </p>
+        )}
       </div>
 
       {/* Meta a Corto Plazo */}
@@ -221,7 +325,7 @@ const InsertData: React.FC<InsertDataProps> = ({
           name="id_tipo_meta_corto_plazo"
           value={formData.id_tipo_meta_corto_plazo}
           onChange={handleInputChange}
-          className="w-full p-2 border rounded"
+          className={`w-full p-2 border rounded ${errors.id_tipo_meta_corto_plazo ? 'border-red-500' : ''}`}
           required
         >
           <option value="">Seleccione una meta a corto plazo</option>
@@ -231,16 +335,24 @@ const InsertData: React.FC<InsertDataProps> = ({
             </option>
           ))}
         </select>
+        {errors.id_tipo_meta_corto_plazo && (
+          <p className="text-red-500 text-sm">
+            {errors.id_tipo_meta_corto_plazo}
+          </p>
+        )}
       </div>
 
       {/* Capital Inicial */}
       <div>
-        <label>Capital Inicial:</label>
+        <label>
+          Capital Inicial (¿cuanto dinero aproximado posees para iniciar el
+          emprendimiento?):
+        </label>
         <select
           name="id_tipo_capital_inicial"
           value={formData.id_tipo_capital_inicial}
           onChange={handleInputChange}
-          className="w-full p-2 border rounded"
+          className={`w-full p-2 border rounded ${errors.id_tipo_capital_inicial ? 'border-red-500' : ''}`}
           required
         >
           <option value="">Seleccione un capital inicial</option>
@@ -250,16 +362,23 @@ const InsertData: React.FC<InsertDataProps> = ({
             </option>
           ))}
         </select>
+        {errors.id_tipo_capital_inicial && (
+          <p className="text-red-500 text-sm">
+            {errors.id_tipo_capital_inicial}
+          </p>
+        )}
       </div>
 
       {/* Origen del Capital Inicial */}
       <div>
-        <label>Origen del Capital Inicial:</label>
+        <label>
+          Origen del Capital Inicial (¿cual es el origen del dinero?):
+        </label>
         <select
           name="id_tipo_origen_capital_inicial"
           value={formData.id_tipo_origen_capital_inicial}
           onChange={handleInputChange}
-          className="w-full p-2 border rounded"
+          className={`w-full p-2 border rounded ${errors.id_tipo_origen_capital_inicial ? 'border-red-500' : ''}`}
           required
         >
           <option value="">Seleccione un origen de capital inicial</option>
@@ -269,16 +388,21 @@ const InsertData: React.FC<InsertDataProps> = ({
             </option>
           ))}
         </select>
+        {errors.id_tipo_origen_capital_inicial && (
+          <p className="text-red-500 text-sm">
+            {errors.id_tipo_origen_capital_inicial}
+          </p>
+        )}
       </div>
 
       {/* Público Objetivo */}
       <div>
-        <label>Público Objetivo:</label>
+        <label>Público Objetivo (¿a quienes le vendemos?):</label>
         <select
           name="id_tipo_publico_objetivo"
           value={formData.id_tipo_publico_objetivo}
           onChange={handleInputChange}
-          className="w-full p-2 border rounded"
+          className={`w-full p-2 border rounded ${errors.id_tipo_publico_objetivo ? 'border-red-500' : ''}`}
           required
         >
           <option value="">Seleccione un público objetivo</option>
@@ -288,16 +412,23 @@ const InsertData: React.FC<InsertDataProps> = ({
             </option>
           ))}
         </select>
+        {errors.id_tipo_publico_objetivo && (
+          <p className="text-red-500 text-sm">
+            {errors.id_tipo_publico_objetivo}
+          </p>
+        )}
       </div>
 
       {/* Estrategia de Precios */}
       <div>
-        <label>Estrategia de Precios:</label>
+        <label>
+          Estrategia de Precios: (¿por que nos compraran a nosotros?)
+        </label>
         <select
           name="id_tipo_estrategia_precios"
           value={formData.id_tipo_estrategia_precios}
           onChange={handleInputChange}
-          className="w-full p-2 border rounded"
+          className={`w-full p-2 border rounded ${errors.id_tipo_estrategia_precios ? 'border-red-500' : ''}`}
           required
         >
           <option value="">Seleccione una estrategia de precios</option>
@@ -307,6 +438,11 @@ const InsertData: React.FC<InsertDataProps> = ({
             </option>
           ))}
         </select>
+        {errors.id_tipo_estrategia_precios && (
+          <p className="text-red-500 text-sm">
+            {errors.id_tipo_estrategia_precios}
+          </p>
+        )}
       </div>
 
       {/* Admin Emprendimiento */}
@@ -316,7 +452,7 @@ const InsertData: React.FC<InsertDataProps> = ({
           name="id_tipo_admin_emprendimiento"
           value={formData.id_tipo_admin_emprendimiento}
           onChange={handleInputChange}
-          className="w-full p-2 border rounded"
+          className={`w-full p-2 border rounded ${errors.id_tipo_admin_emprendimiento ? 'border-red-500' : ''}`}
           required
         >
           <option value="">Seleccione un tipo de administración</option>
@@ -326,6 +462,11 @@ const InsertData: React.FC<InsertDataProps> = ({
             </option>
           ))}
         </select>
+        {errors.id_tipo_admin_emprendimiento && (
+          <p className="text-red-500 text-sm">
+            {errors.id_tipo_admin_emprendimiento}
+          </p>
+        )}
       </div>
 
       {/* Experiencia del Empleado */}
@@ -335,7 +476,7 @@ const InsertData: React.FC<InsertDataProps> = ({
           name="id_tipo_empleado_experiencia"
           value={formData.id_tipo_empleado_experiencia}
           onChange={handleInputChange}
-          className="w-full p-2 border rounded"
+          className={`w-full p-2 border rounded ${errors.id_tipo_empleado_experiencia ? 'border-red-500' : ''}`}
           required
         >
           <option value="">Seleccione un nivel de experiencia</option>
@@ -345,6 +486,11 @@ const InsertData: React.FC<InsertDataProps> = ({
             </option>
           ))}
         </select>
+        {errors.id_tipo_empleado_experiencia && (
+          <p className="text-red-500 text-sm">
+            {errors.id_tipo_empleado_experiencia}
+          </p>
+        )}
       </div>
 
       {/* Utilidad Neta */}
@@ -355,19 +501,30 @@ const InsertData: React.FC<InsertDataProps> = ({
           name="utilidad_neta"
           value={formData.utilidad_neta}
           onChange={handleInputChange}
-          className="w-full p-2 border rounded"
+          className={`w-full p-2 border rounded ${
+            errors.utilidad_neta ? 'border-red-500' : ''
+          }`}
           required
         />
+        {errors.utilidad_neta && (
+          <p className="text-red-500 text-sm">{errors.utilidad_neta}</p>
+        )}
       </div>
 
       {/* Botones */}
       <div className="flex space-x-4">
         <button
           type="submit"
-          className="px-4 py-2 bg-green-500 text-white rounded"
+          className={`px-4 py-2 rounded text-white transition-colors duration-300 ${
+            isFormValid
+              ? 'bg-green-500 hover:bg-green-600'
+              : 'bg-gray-400 cursor-not-allowed'
+          }`}
+          disabled={!isFormValid}
         >
           Crear Emprendimiento
         </button>
+
         <button
           type="button"
           onClick={onCancel}

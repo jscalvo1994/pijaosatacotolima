@@ -1,63 +1,31 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ProjectDetails from './ProjectDetails';
-import InsertData from './InsertData'; // Importar el formulario
+import InsertData from './InsertData';
 
 interface ProjectCardProps {
-  emprendimientos: {
-    id: number;
-    nombre: string;
-  }[];
-  n_emprendimientos: number;
-  idGoogle: string; // ID del usuario que se enviará al formulario
+  idGoogle: string;
 }
 
 interface Metadata {
-  empleados: {
-    cargo: string;
-    id: number;
-  }[];
+  empleados: { cargo: string; id: number }[];
   'infr. fisica': {
-    terrenos?: {
-      id: number;
-      tipo: string;
-    }[];
-    locales?: {
-      id: number;
-      tipo: string;
-    }[];
-    vehículos?: {
-      id: number;
-      tipo: string;
-    }[];
-    'servicios publicos'?: {
-      id: number;
-      tipo: string;
-    }[];
+    terrenos?: { id: number; tipo: string }[];
+    locales?: { id: number; tipo: string }[];
+    vehículos?: { id: number; tipo: string }[];
+    'servicios publicos'?: { id: number; tipo: string }[];
   }[];
-  'infraestructura tecnologica': {
-    id: number;
-    'infr.': string;
-  }[];
-  maquinaria: {
-    id: number;
-    maquinaria: string;
-  }[];
-  productos: {
-    id: number;
-    producto: string;
-  }[];
+  'infraestructura tecnologica': { id: number; 'infr.': string }[];
+  maquinaria: { id: number; maquinaria: string }[];
+  productos: { id: number; producto: string }[];
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({
-  emprendimientos,
-  n_emprendimientos,
-  idGoogle,
-}) => {
-  const [selectedProject, setSelectedProject] = useState<any | null>(null); // Datos del proyecto seleccionado
+const ProjectCard: React.FC<ProjectCardProps> = ({ idGoogle }) => {
+  const [emprendimientos, setEmprendimientos] = useState<any[]>([]);
+  const [nEmprendimientos, setNEmprendimientos] = useState(0);
+  const [selectedProject, setSelectedProject] = useState<any | null>(null);
   const [metadata, setMetadata] = useState<Metadata>({
     empleados: [],
     'infr. fisica': [],
@@ -67,7 +35,27 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [showInsertForm, setShowInsertForm] = useState(false); // Estado para mostrar el formulario
+  const [showInsertForm, setShowInsertForm] = useState(false);
+
+  // 🔄 Cargar emprendimientos al iniciar
+  useEffect(() => {
+    fetchEmprendimientos();
+  }, []);
+
+  const fetchEmprendimientos = async () => {
+    try {
+      const response = await axios.post('/api/auth/emprendedor', {
+        id: idGoogle,
+      });
+
+      if (response.data?.emprendimientos) {
+        setEmprendimientos(response.data.emprendimientos);
+        setNEmprendimientos(response.data.n_emprendimientos || 0);
+      }
+    } catch (err) {
+      console.error('Error al cargar emprendimientos:', err);
+    }
+  };
 
   const handleViewDetails = async (id: number) => {
     setLoading(true);
@@ -113,17 +101,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     setShowInsertForm(false);
   };
 
-  const handleInsertSuccess = () => {
+  const handleInsertSuccess = async () => {
     setShowInsertForm(false);
+    await fetchEmprendimientos(); // 🔄 Refresca la lista
+    const ultimo = emprendimientos[emprendimientos.length - 1];
+    if (ultimo) {
+      handleViewDetails(ultimo.id); // Abre el nuevo
+    }
     alert('Emprendimiento creado exitosamente.');
-    // Aquí podrías recargar la lista de emprendimientos o actualizar el estado
   };
-  console.log('listado de emprendimientos', emprendimientos);
+
   return (
     <div className="bg-white shadow-md rounded-lg p-6">
       <h2 className="text-xl font-semibold mb-4">Listado de Emprendimientos</h2>
 
-      {/* Lista de emprendimientos */}
       {emprendimientos.length > 0 ? (
         <ul className="space-y-4">
           {emprendimientos.map((emprendimiento) => (
@@ -145,8 +136,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <p>No hay emprendimientos disponibles.</p>
       )}
 
-      {/* Botón para crear un nuevo emprendimiento */}
-      {n_emprendimientos < 3 && !showInsertForm && (
+      {/* Botón para crear nuevo */}
+      {nEmprendimientos < 3 && !showInsertForm && (
         <button
           onClick={handleShowInsertForm}
           className="mt-4 px-4 py-2 bg-green-500 text-white rounded"
@@ -155,7 +146,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </button>
       )}
 
-      {/* Detalles del proyecto seleccionado */}
+      {/* Detalles */}
       {selectedProject && (
         <ProjectDetails
           project={selectedProject}
@@ -165,7 +156,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         />
       )}
 
-      {/* Formulario para insertar un nuevo emprendimiento */}
+      {/* Formulario */}
       {showInsertForm && (
         <InsertData
           idGoogle={idGoogle}
@@ -174,10 +165,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         />
       )}
 
-      {/* Indicador de carga */}
       {loading && <p className="text-blue-500 mt-4">Cargando detalles...</p>}
-
-      {/* Error */}
       {error && <p className="text-red-500 mt-4">{error}</p>}
     </div>
   );

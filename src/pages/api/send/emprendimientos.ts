@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+//api send emprendimientos
 import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 

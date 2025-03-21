@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+//api insert emprendimiento
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 

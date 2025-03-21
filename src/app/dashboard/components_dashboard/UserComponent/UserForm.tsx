@@ -134,8 +134,8 @@ const UserForm: React.FC<UserFormProps> = ({
     <form className="space-y-4">
       {/*User ID*/}
       <div>
-        <label className="block mb-1 font-semibold">ID</label>
         <input
+          className="hidden"
           type="text"
           name="idGoogle"
           value={idGoogle || ''}
@@ -144,8 +144,8 @@ const UserForm: React.FC<UserFormProps> = ({
       </div>
       {/*User Email*/}
       <div>
-        <label className="block mb-1 font-semibold">email</label>
         <input
+          className="hidden"
           type="email"
           name="email"
           value={email || ''}
