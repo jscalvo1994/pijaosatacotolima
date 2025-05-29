@@ -63,7 +63,7 @@ const NavbarContent: React.FC = () => {
               LogOut
             </button>
           ) : (
-            <Link href="/login" className="hover:text-green-300">
+            <Link href="https://pijaosatacotolima.com.co/login" className="hover:text-green-300">
               Login
             </Link>
           )}
@@ -116,7 +116,7 @@ const NavbarContent: React.FC = () => {
               </button>
             ) : (
               <Link
-                href="/login"
+                href="https://pijaosatacotolima.com.co/login"
                 onClick={toggleMenu}
                 className="hover:text-green-300"
               >
