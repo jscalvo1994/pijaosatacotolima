@@ -175,3 +175,8 @@ Próximos pasos
 -Optimización del Dashboard:
 -Mejorar la interfaz del Dashboard con métricas y personalización.
 ```
+Se aññade este perfil al repositorio para tener acceso al codigo fuente de la pagina web pijaosatatocolima
+
+
+
+se
